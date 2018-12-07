@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans" 
+    xmlns:util="http://www.springframework.org/schema/util"  
+    xmlns:task="http://www.springframework.org/schema/task" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+	xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd 
+	 http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd  
+     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd" 
+	default-lazy-init="false">
+
+	<bean id="propertyConfigurer"
+		class="com.digital.dance.framework.infrastructure.commons.DecryptPropertyPlaceholderConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:system.properties</value>
+				<value>classpath:sso.properties</value>
+				<value>classpath:security.properties</value>
+				<value>classpath:redis.properties</value>
+				<value>classpath:pay.properties</value>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:mq.properties</value>
+			</list>
+		</property>
+		<property name="fileEncoding" value="UTF-8" />
+	</bean>
+
+	<bean id="appPropsConfigLocation" class="com.digital.dance.framework.infrastructure.commons.AppPropsConfigLocation">
+		<property name="locations">
+			<list>
+				<value>classpath:system.properties</value>
+				<value>classpath:sso.properties</value>
+				<value>classpath:security.properties</value>
+				<value>classpath:redis.properties</value>
+				<value>classpath:pay.properties</value>
+				<value>classpath:jdbc.properties</value>
+				<value>classpath:mq.properties</value>
+			</list>
+		</property>
+	</bean>
+
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping">
+	</bean>
+	<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">
+	  <property name="messageConverters">
+	   <list>
+	    <bean class="org.springframework.http.converter.json.MappingJackson2HttpMessageConverter" />
+	   </list>
+	  </property>
+	</bean>
+	
+<bean id="rSACoder" class="com.digital.dance.commons.security.RSACoder">
+	<property name="privateKeyFilePath" value="${PRIVATE_KEY_FILE_PATH}" />
+	<property name="publicKeyFilePath" value="${PUBLIC_KEY_FILE_PATH}" />
+</bean>		
+
+	<!--数据持久化文件-->
+	<!--<import resource="classpath*:/framework-identity-service.xml" />-->
+	<import resource="classpath*:/user-dao.xml" />
+	<import resource="classpath*:/user-service.xml" />
+	<import resource="classpath:/conf/spring-cache.xml" />
+	<!-- 消费方 -->
+	<import resource="classpath:/conf/user-dubbo.xml"/>
+	<import resource="classpath:/conf/framework-sso-client.xml" />
+	<import resource="classpath:/conf/spring-mq.xml" />
+	<context:component-scan base-package="org.springframework.web.filter.DelegatingFilterProxy"></context:component-scan>
+</beans>

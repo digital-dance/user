@@ -1,0 +1,38 @@
+﻿/*用户分类集成测试脚本*/
+
+http://localhost:8080/user-war/userCategory/register
+
+http://localhost:8080/user-war/userCategory/categoryName?categoryName=GD
+http://localhost:8080/user-war/userCategory/categoryId?categoryId=10000
+http://localhost:8080/user-war/userCategory/allusercategories?categoryName=GD
+
+http://localhost:8080/user-war/userCategory/paged/usercategories?pageSize=1&pageIndex=0&categoryName=GD
+
+
+$.ajax({
+
+
+	type: "delete",
+
+       
+	url: "http://127.0.0.1:8080/user-war/userCategory/vos",
+
+       
+	data: JSON.stringify([{"categoryId":"10000","categoryName":"GD"},{"categoryId":"10001","categoryName":"None-GD"}]),
+
+contentType: "application/json; charset=utf-8",
+       
+	
+dataType: "json",
+
+       
+	success: function(data){
+
+ 
+            alert(JSON.stringify(data));
+
+
+	}
+
+     
+});

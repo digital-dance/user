@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.digital.dance.dao.UserCategoryDao">
+    <resultMap id="userCategoryMap" type="userCategoryEO">
+        <result column="categoryId" property="categoryId" jdbcType="VARCHAR"/>
+        <result column="categoryName" property="categoryName" jdbcType="VARCHAR"/>
+    </resultMap>
+	<insert id="addUserCategory" keyProperty="categoryId" useGeneratedKeys="false" parameterType="userCategoryEO">
+	       <![CDATA[
+	      insert into user_category
+	      (
+				categoryId            ,
+				categoryName
+	      )
+	      values
+	      (
+				#{categoryId,jdbcType=VARCHAR},
+				#{categoryName,jdbcType=VARCHAR}
+	      )
+	      ]]>
+	</insert>   
+  
+    <select id="findUserCategoryByName" resultMap="userCategoryMap" parameterType="string">
+		 SELECT
+		    categoryId            ,
+		    categoryName
+		 FROM user_category where categoryName=#{categoryName,jdbcType=VARCHAR} limit 1
+    </select>
+
+    <select id="findUserCategoryById" resultMap="userCategoryMap" parameterType="string">
+		 SELECT 
+		    categoryId            ,
+			categoryName
+		FROM user_category where categoryId=#{categoryId,jdbcType=VARCHAR} limit 1
+		
+	</select>
+	
+	<select id="searchPagedUserCategorys" resultMap="userCategoryMap" parameterType="userCategoryEO">
+		SELECT 
+		    categoryId            ,
+			categoryName
+		FROM user_category where 1=1 
+		<if test="categoryId != null">
+		    and categoryId like
+		    concat(concat('%',#{categoryId,jdbcType=VARCHAR}),'%')
+	    </if>
+		<if test="categoryName != null">
+		    and categoryName like
+		    concat(concat('%',#{categoryName,jdbcType=VARCHAR}),'%')
+		</if> limit #{pageSize,jdbcType=INTEGER} offset #{offsetNum,jdbcType=INTEGER} 
+	</select>
+	
+	<select id="searchUserCategorys" resultMap="userCategoryMap" parameterType="userCategoryEO">
+		SELECT
+		    categoryId            ,
+			categoryName
+		FROM user_category where 1=1 
+		<if test="categoryId != null">
+		    and categoryId like
+		    concat(concat('%',#{categoryId,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="categoryName != null">
+		    and categoryName like
+		    concat(concat('%',#{categoryName,jdbcType=VARCHAR}),'%')
+		</if>
+	</select>
+	
+	<delete id="deleteUserCategorys" parameterType="userCategoryEO">
+		<foreach item="item" collection="list" index="index" separator=";">
+			<if test="item.categoryId != null" >
+				DELETE FROM user_category where categoryId = #{item.categoryId,jdbcType=VARCHAR}
+			</if>
+		</foreach>
+	</delete>
+</mapper>

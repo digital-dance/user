@@ -1,0 +1,23 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+  <parent>
+		<groupId>com.digital.dance.commons</groupId>
+		<artifactId>digital-dance-commons</artifactId>
+		<version>0.0.1-SNAPSHOT</version>
+  </parent>
+  <groupId>com.digital.dance.user</groupId>
+  <artifactId>user</artifactId>
+  <packaging>pom</packaging>
+  <name>user</name>
+  <modules>
+  	<module>user-commons</module>
+  	<module>user-dao</module>
+  	<module>user-dao-impl</module>
+  	<module>user-service</module>
+  	<module>user-impl</module>
+  	<module>user-web</module>
+  	<module>user-war</module>
+  	<!--<module>user-service-provider-war</module>-->
+  	<!--<module>user-service-consumer-war</module>-->
+  </modules>
+</project>

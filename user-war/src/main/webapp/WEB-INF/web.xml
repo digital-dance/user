@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd"
+	version="3.0">
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>
+			classpath:conf/user-context.xml
+		</param-value>
+	</context-param>
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<servlet>
+		<servlet-name>SpringMVC</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>
+			classpath:conf/user-servlet.xml
+			</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+		<async-supported>true</async-supported>
+	</servlet>
+	
+	<servlet>	
+		<servlet-name>DefaultServlet</servlet-name>  
+		<servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>  
+		<init-param>  
+			<param-name>debug</param-name>  
+			<param-value>0</param-value>  
+		</init-param>  
+		<init-param>  
+			<param-name>listings</param-name>  
+			<param-value>false</param-value>  
+		</init-param>  
+		<load-on-startup>1</load-on-startup>  
+	</servlet>
+	
+	<servlet-mapping>
+		<servlet-name>SpringMVC</servlet-name>
+		<!-- 此处可以可以配置成*.do，对应struts的后缀习惯 -->
+		<url-pattern>/</url-pattern>
+	</servlet-mapping>
+	
+    <!-- The mapping for the default servlet --> 
+    <servlet-mapping> 
+        <servlet-name>DefaultServlet</servlet-name> 
+        <url-pattern>*.html</url-pattern> 
+    </servlet-mapping>
+     
+<!-- for session begin -->
+<!-- delegatingFilterProxy -->
+<filter>
+    <filter-name>springSessionRepositoryFilter</filter-name>
+    <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+</filter>
+<filter-mapping>
+    <filter-name>springSessionRepositoryFilter</filter-name>
+    <url-pattern>/*</url-pattern>
+</filter-mapping>
+
+<!-- for session end -->
+	<filter>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>utf-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>CharacterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<listener>
+		<listener-class>org.springframework.web.context.ContextCleanupListener</listener-class>
+	</listener>
+
+	<listener>
+		<listener-class>org.springframework.web.context.request.RequestContextListener</listener-class>
+	</listener>
+
+
+	<filter>
+		<filter-name>ExceptionFilter</filter-name>
+		<filter-class>com.digital.dance.framework.infrastructure.commons.ExceptionFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>ExceptionFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 防止javascript 脚本注入 -->
+	<filter>
+		<filter-name>XssFilter</filter-name>
+		<filter-class>com.digital.dance.user.commons.XssFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>XssFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- sso Filter配置 -->
+<!--	
+ 	 <filter>
+		<filter-name>loginFilter</filter-name>
+		<filter-class>com.digital.dance.framework.sso.filter.SSOLoginFilter</filter-class>
+ 		 
+		<init-param>
+			<param-name>cas_web_site_name</param-name>
+			<param-value>serverroom_user</param-value>
+		</init-param>
+		
+		<init-param>
+			<param-name>allowUrl</param-name>
+			<param-value>http://127.0.0.1:8008/#/home;http://127.0.0.1:8008/user/login/views/login.jsp;/index/home;/login/user;login/views/default</param-value>
+		</init-param>
+		<init-param>
+			<param-name>allowSuffix</param-name>
+			<param-value>css;js;jpg;png</param-value>
+		</init-param>
+		<init-param>
+			<param-name>bizloginUrl</param-name>
+			<param-value>http://16.187.145.23/userservice/index/home</param-value>
+		</init-param>
+		<init-param>
+			<param-name>readonlyUrl</param-name>
+			<param-value>/index/home;/login/user;login/views/default</param-value>
+		</init-param>
+		<init-param>
+			<param-name>homePageUrl</param-name>
+			<param-value>http://16.173.234.23/#/home</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>loginFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>  -->
+<!--
+	<servlet>
+		<servlet-name>MideaSSOLoginServlet</servlet-name>
+		<servlet-class>com.midea.framework.e4a.sso.web.servlet.MideaSSOLoginServlet</servlet-class>
+		 初始化业务系统token验证URL，内容取决于验证servlet的mapping配置 
+		<init-param>
+			<param-name>bizloginUrl</param-name>
+			<param-value>http://efssit.midea.com/home_sso/token.html</param-value>
+		</init-param>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>MideaSSOLoginServlet</servlet-name>
+		 映射路径可以自定义，但需要与拦截器的[bizloginUrl]初始化参数保持一致 
+		<url-pattern>/home_sso/token.html</url-pattern>
+	</servlet-mapping> 
+	-->
+</web-app>

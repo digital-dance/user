@@ -1,0 +1,138 @@
+﻿/*用户管理集成测试脚本*/
+
+http://localhost:8080/user-war/user/register?userId=3q4343ssdsd1&userName=asdfsdf
+
+http://localhost:8080/user-war/user/userName?userName=asdfsdf
+http://localhost:8080/user-war/user/userId?userId=34343ssdsd1
+http://localhost:8080/user-war/user/allusers?userName=asdfsdf
+
+http://localhost:8080/user-war/user/paged/users?userId=34343ssdsd1&userName=asdfsdf&pageSize=1&pageIndex=1
+$.ajax({
+
+
+	type: "get",
+
+       
+	url: "http://127.0.0.1:8080/user-war/login/session/id",
+
+	success: function(data){
+
+ 
+            alert(JSON.stringify(data));
+
+
+	}
+
+     
+});
+$.ajax({
+
+
+	type: "PUT",
+
+       
+	url: "http://127.0.0.1:8080/user-war/user/register?userId=3q4343ssdsd1&userName=asdfsdf",
+
+       
+	data: JSON.stringify([{"userId":"34343ssdsd1","userName":"asdfsdf0"},{"userId":"3q4343ssdsd1","userName":"asdfsdf1"}]),
+
+contentType: "application/json; charset=utf-8",
+       
+	
+dataType: "json",
+
+       
+	success: function(data){
+
+ 
+            alert(JSON.stringify(data));
+
+
+	}
+
+     
+});
+$.ajax({
+
+
+	type: "PUT",
+
+       
+	url: "http://16.173.234.12:8080/userservice/user/register",
+
+       
+	data: JSON.stringify({"userName":"asdfsdf0ddd"}),
+
+contentType: "application/json; charset=utf-8",
+       
+	
+dataType: "json",
+
+       
+	success: function(data){
+
+ 
+            alert(JSON.stringify(data));
+
+
+	}
+
+     
+});
+
+$.ajax({
+
+
+	type: "delete",
+
+       
+	url: "http://127.0.0.1:8080/user-war/user/vos",
+
+       
+	data: JSON.stringify([{"userId":"34343ssdsd1","userName":"asdfsdf0"}]),
+
+contentType: "application/json; charset=utf-8",
+       
+	
+dataType: "json",
+
+       
+	success: function(data){
+
+ 
+            alert(JSON.stringify(data));
+
+
+	}
+
+     
+});
+
+
+$.ajax({
+
+
+	type: "POST",
+
+
+	url: "http://127.0.0.1:8008/user/login/user",
+
+
+	data: JSON.stringify({﻿"userEmail":"34343ssdsd1",﻿"password":"asdfsdf0"}),
+
+contentType: "application/json; charset=utf-8",
+
+
+dataType: "json",
+
+
+	success: function(data){
+
+
+            alert(JSON.stringify(data));
+
+
+	}
+
+
+});

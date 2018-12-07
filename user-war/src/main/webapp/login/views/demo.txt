@@ -1,0 +1,94 @@
+    var _sessionId1 = '';
+    var _sessionId = '';
+
+        function getSessionId(urlValue){
+         	 $.ajax({
+ 			            url: urlValue,
+ 			            type: "get",
+ 			            
+ 			            error: function(jqXHR, textStatus, errorThrown) {
+ 			                if (textStatus == "error") {
+ 			                    alert(textStatus + " : " +errorThrown);
+ 			                } else {
+ 			                    alert(textStatus);
+ 			                }
+ 			            },
+ 			            success: function(data, textStatus, jqXHR) {
+ 			                _sessionId = jqXHR.getResponseHeader("X-Auth-Token");
+ 			                alert(_sessionId);       //返回null，不能获取Set-Cookie的值
+ 			                login(_sessionId);
+ 			               
+ 			            }
+ 			        });
+         }
+         
+         
+         
+         function login(sessionId){
+             var user = {};                                                                                                              
+         		//http://16.187.145.23/userservice/login/session_in
+         		user.userEmail = 'xin-yu.liu@hpe.com';
+    		    user.password = 'iamlxrf4_2';                                                                                     
+         		$.ajax({                                                                                                            
+                                                                                                                         
+         			type: "post",                                                                                                     
+         			                                                                                                                  
+         			url: "http://16.187.145.23/userservice/login/user?clientType=3&X-Auth-Token=" + sessionId,
+         			data: JSON.stringify(user),                                                                                       
+                                                                                                                         
+         			contentType: "application/json; charset=utf-8",                                                                   
+         			                                                                                                                  
+         				                                                                                                                
+         			dataType: "json",                                                                                                 
+         			success: function(ret, textStatus, jqXHR){                                                                        
+         		 		                                              
+         		            alert(JSON.stringify(ret)); 
+         		            accessService();
+                                                                                                                         
+         			}                                                                                                                 
+         		                                                                                                                    
+         		});   
+        } 
+        
+        function accessService(){
+ 	       $.ajax({
+ 	            url: "http://16.187.145.23/userservice/login/session/id?clientType=3&X-Auth-Token=" + _sessionId1,
+ 	            type: "get",
+ 	            
+ 	            error: function(jqXHR, textStatus, errorThrown) {
+ 	                if (textStatus == "error") {
+ 	                    alert(textStatus + " : " +errorThrown);
+ 	                } else {
+ 	                    alert(textStatus);
+ 	                }
+ 	            },
+ 	            success: function(data, textStatus, jqXHR) {
+ 	              alert(JSON.stringify(data)); 
+ 	               
+ 	              
+ 	            }
+ 	        });
+        
+        }
+		
+		$.ajax({
+                url: "http://16.187.145.23/userservice/login/session/id?clientType=3",
+                type: "get",
+                
+                error: function(jqXHR, textStatus, errorThrown) {
+                    if (textStatus == "error") {
+                        alert(textStatus + " : " +errorThrown);
+                    } else {
+                        alert(textStatus);
+                    }
+                },
+                success: function(data, textStatus, jqXHR) {
+                _sessionId1 = jqXHR.getResponseHeader("X-Auth-Token");
+                alert(_sessionId1);
+                  data =  eval( "(" + data + ")" );
+                   
+                   //begin
+                  getSessionId(data.result);
+                   //end
+                }
+            });

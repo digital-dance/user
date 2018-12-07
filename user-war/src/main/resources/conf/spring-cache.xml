@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+	 http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-lazy-init="false">
+
+    <!-- redis -->
+    <bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">
+        <property name="maxTotal" value="${redis.maxActive}"/>
+        <property name="maxIdle" value="${redis.maxIdle}"/>
+        <property name="maxWaitMillis" value="${redis.maxWait}"/>
+        <property name="testOnBorrow" value="${redis.testOnBorrow}"/>
+    </bean>
+
+    <bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
+        <property name="usePool" value="true"></property>
+        <property name="hostName" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <!--<property name="password" value="${redis.pass}" />-->
+        <!-- <property name="timeout" value="${redis.timeout}" /> -->
+        <property name="database" value="${redis.default.db}"/>
+        <constructor-arg index="0" ref="jedisPoolConfig"/>
+    </bean>
+
+    <bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">
+        <property name="connectionFactory" ref="jedisConnectionFactory"/>
+    </bean>
+
+
+    <!-- 替代默认使用cookie,这里使用的是httpheader -->
+    <!-- <bean id="httpSessonStrategy" class="org.springframework.session.web.http.HeaderHttpSessionStrategy"/> -->
+    <!-- 将session放入redis -->
+    <bean id="redisHttpSessionConfiguration"
+          class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
+        <property name="maxInactiveIntervalInSeconds" value="1800"/>
+        <!-- <property name="httpSessionStrategy" ref="httpSessonStrategy"/> -->
+    </bean>
+
+    <!-- 定时任务相关配置 -->
+    <task:executor id="executor" pool-size="10" queue-capacity="128"/>
+    <task:scheduler id="scheduler" pool-size="10"/>
+    <task:annotation-driven executor="executor" scheduler="scheduler" proxy-target-class="true"/>
+    <!-- 让Spring Session不再执行config命令 -->
+
+    <util:constant static-field="org.springframework.session.data.redis.config.ConfigureRedisAction.NO_OP"/>
+    <!--<bean id="jedisPoolConfig" class="redis.clients.jedis.JedisPoolConfig">-->
+    <!--<property name="maxTotal" value="${redis.maxActive}" />-->
+    <!--<property name="maxIdle" value="${redis.maxIdle}" />-->
+    <!--<property name="maxWaitMillis" value="${redis.maxWait}" />-->
+    <!--<property name="testOnBorrow" value="${redis.testOnBorrow}" />-->
+    <!--</bean>-->
+
+    <!--<bean id="jedisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">-->
+    <!--<property name="usePool" value="true"></property>-->
+    <!--<property name="hostName" value="${redis.host}" />-->
+    <!--<property name="port" value="${redis.port}" />-->
+    <!--<property name="password" value="${redis.pass}" />-->
+    <!--&lt;!&ndash; <property name="timeout" value="${redis.timeout}" /> &ndash;&gt;-->
+    <!--<property name="database" value="${redis.default.db}" />-->
+    <!--<constructor-arg index="0" ref="jedisPoolConfig" />-->
+    <!--</bean>-->
+
+    <!--<bean id="redisTemplate" class="org.springframework.data.redis.core.StringRedisTemplate">-->
+    <!--<property name="connectionFactory" ref="jedisConnectionFactory" />-->
+    <!--</bean>-->
+    <!--数据持久化文件-->
+
+    <bean id="redisFactory" class="com.digital.dance.framework.codis.client.RedisFactory">
+        <property name="config" ref="jedisPoolConfig"/>
+        <property name="proxyHost" value="${redis.host}"/>
+        <property name="port" value="${redis.port}"/>
+        <property name="subSysName" value="${codis.subSysName}"/>
+        <property name="authpassword" value="${codis.authpassword}"/>
+        <property name="timeout" value="${redis.cache.timeout}"/>
+        <property name="nodes" value="${redis.nodes}"/>
+    </bean>
+    <bean id="codis" class="com.digital.dance.framework.codis.impl.CodisImpl">
+        <property name="salt" value="${codis.salt}"/>
+        <property name="redisFactory" ref="redisFactory"/>
+    </bean>
+
+    <bean id="redis" class="com.digital.dance.framework.codis.impl.CodisImpl">
+        <property name="salt" value="${codis.salt}"/>
+        <property name="redisFactory" ref="redisFactory"/>
+    </bean>
+
+</beans>

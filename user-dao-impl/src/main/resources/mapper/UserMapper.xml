@@ -1,0 +1,267 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.digital.dance.dao.UserDao">
+	<resultMap id="userResultMap" type="userEO">
+		<result column="userId" property="userId" jdbcType="VARCHAR"/>
+		<result column="userName" property="userName" jdbcType="VARCHAR"/>
+		<result column="userDisplayName" property="userDisplayName" jdbcType="VARCHAR"/>
+		<result column="userEmail" property="userEmail" jdbcType="VARCHAR"/>
+		<result column="userCategory" property="userCategory" jdbcType="VARCHAR"/>
+		<result column="userMobile" property="userMobile" jdbcType="VARCHAR"/>
+	</resultMap>
+	<!-- 插入用户数据-->
+	<insert id="addUser" keyProperty="userId" useGeneratedKeys="false" parameterType="userEO">
+	       <![CDATA[
+	      insert into system_user
+	      (
+				userId            ,
+				userName          ,
+				userDisplayName   ,
+				userEmail         ,
+				password          ,
+				userCategory      ,
+				userMobile
+	
+	      )
+	      values
+	      (
+				#{userId,jdbcType=VARCHAR},
+				#{userName,jdbcType=VARCHAR},
+				#{userDisplayName,jdbcType=VARCHAR},
+				#{userEmail,jdbcType=VARCHAR},
+				#{password,jdbcType=VARCHAR},
+				#{userCategory,jdbcType=VARCHAR},
+				#{userMobile,jdbcType=VARCHAR}
+	      )
+	      ]]>
+	</insert>   
+  
+	<select id="findUserByUserName" resultMap="userResultMap" parameterType="string">
+		 SELECT 
+		    userId            ,
+			userName          ,
+			userDisplayName   ,
+			userEmail         ,
+			userCategory      ,
+			userMobile
+		FROM system_user where userName=#{userName,jdbcType=VARCHAR} limit 1
+		
+	</select>
+  
+  <select id="findUserByUserId" resultMap="userResultMap" parameterType="string">
+		 SELECT 
+		    userId            ,
+			userName          ,
+			userDisplayName   ,
+			userEmail         ,
+			userCategory      ,
+			userMobile
+		FROM system_user where userId=#{userId,jdbcType=VARCHAR} limit 1
+		
+	</select>
+	
+	<select id="findPagedUsers" resultMap="userResultMap" parameterType="userEO">
+		 SELECT 
+		    userId            ,
+			userName          ,
+			userDisplayName   ,
+			userEmail         ,
+			userCategory      ,
+			userMobile
+		FROM system_user where 1=1 
+		<if test="userId != null">
+		    and userId =#{userId,jdbcType=VARCHAR}
+	    </if>
+		<if test="userName != null">
+		    and userName =#{userName,jdbcType=VARCHAR}
+		</if>
+		<if test="userDisplayName != null">
+		    and userDisplayName =#{userDisplayName,jdbcType=VARCHAR}
+	    </if>
+		<if test="userEmail != null">
+		    and userEmail =#{userEmail,jdbcType=VARCHAR}
+		</if>
+		<if test="userCategory != null">
+		    and userCategory =#{userCategory,jdbcType=VARCHAR}
+	    </if>
+		<if test="userMobile != null">
+		    and userMobile =#{userMobile,jdbcType=VARCHAR}
+		</if> limit #{pageSize,jdbcType=INTEGER} offset #{offsetNum,jdbcType=INTEGER} 
+		
+	</select>
+  
+  	<select id="findAllUsers" resultMap="userResultMap" parameterType="userEO">
+  	    <choose>
+  			<when test="userEmail != null">
+  				<![CDATA[
+			      {CALL findAndMaintainUsers(#{userEmail,jdbcType=VARCHAR,mode=IN})}
+			    ]]>
+  			</when>
+		  	<otherwise>
+				 SELECT 
+				    userId            ,
+					userName          ,
+					userDisplayName   ,
+					userEmail         ,
+					userCategory      ,
+					userMobile
+				FROM system_user where 1=1 
+				<if test="userId != null">
+				    and userId =#{userId,jdbcType=VARCHAR}
+			    </if>
+				<if test="userName != null">
+				    and userName =#{userName,jdbcType=VARCHAR}
+				</if>
+				<if test="userDisplayName != null">
+				    and userDisplayName =#{userDisplayName,jdbcType=VARCHAR}
+			    </if>
+				<!-- <if test="userEmail != null">
+				    and userEmail =#{userEmail,jdbcType=VARCHAR}
+				</if> -->
+				<if test="userCategory != null">
+				    and userCategory =#{userCategory,jdbcType=VARCHAR}
+			    </if>
+				<if test="userMobile != null">
+				    and userMobile =#{userMobile,jdbcType=VARCHAR}
+				</if> 
+		  </otherwise>
+		</choose>
+	</select>
+
+	<select id="searchPagedUsers" resultMap="userResultMap"
+		parameterType="userEO">
+		SELECT
+		userId ,
+		userName ,
+		userDisplayName ,
+		userEmail ,
+		userCategory ,
+		userMobile
+		FROM system_user where 1=1
+		<if test="userId != null">
+			and userId like
+			concat(concat('%',#{userId,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="userName != null">
+			and userName like
+			concat(concat('%',#{userName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="userDisplayName != null">
+			and userDisplayName like
+			concat(concat('%',#{userDisplayName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="userEmail != null">
+			and userEmail like
+			concat(concat('%',#{userEmail,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="userCategory != null">
+			and userCategory like
+			concat(concat('%',#{userCategory,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="userMobile != null">
+			and userMobile like
+			concat(concat('%',#{userMobile,jdbcType=VARCHAR}),'%')
+		</if>
+		limit #{pageSize,jdbcType=INTEGER} offset
+		#{offsetNum,jdbcType=INTEGER}
+	</select>
+
+	<select id="searchAllUsers" resultMap="userResultMap"
+		parameterType="userEO">
+		SELECT
+		userId ,
+		userName ,
+		userDisplayName ,
+		userEmail ,
+		userCategory ,
+		userMobile
+		FROM system_user where 1=1
+		<if test="userId != null">
+			and userId like
+			concat(concat('%',#{userId,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="userName != null">
+			and userName like
+			concat(concat('%',#{userName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="userDisplayName != null">
+			and userDisplayName like
+			concat(concat('%',#{userDisplayName,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="userEmail != null">
+			and userEmail like
+			concat(concat('%',#{userEmail,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="userCategory != null">
+			and userCategory like
+			concat(concat('%',#{userCategory,jdbcType=VARCHAR}),'%')
+		</if>
+		<if test="userMobile != null">
+			and userMobile like
+			concat(concat('%',#{userMobile,jdbcType=VARCHAR}),'%')
+		</if>
+	</select>
+	
+	<update id="updateUsers" parameterType="userEO">
+	       
+	       <foreach item="item" collection="list" index="index" separator=";"> 
+		      update system_user
+			     <trim prefix="set" suffixOverrides=",">
+					<if test="item.userName != null">
+					    userName =#{item.userName,jdbcType=VARCHAR},
+					</if>
+					<if test="item.userDisplayName != null">
+					    userDisplayName =#{item.userDisplayName,jdbcType=VARCHAR},
+				    </if>
+					<if test="item.userEmail != null">
+					    userEmail =#{item.userEmail,jdbcType=VARCHAR},
+					</if>
+					<if test="item.userCategory != null">
+					    userCategory =#{item.userCategory,jdbcType=VARCHAR},
+				    </if>
+					<if test="item.userMobile != null">
+					    userMobile =#{item.userMobile,jdbcType=VARCHAR}
+					</if> 
+				</trim>
+		      where userId = #{item.userId,jdbcType=VARCHAR};
+	     </foreach> 
+	</update>   
+  
+	<delete id="deleteUsers" parameterType="userEO">
+		<foreach item="item" collection="list" index="index" separator=";">
+			 delete from system_user where userId = #{item.userId,jdbcType=VARCHAR}
+		</foreach>
+	</delete>
+
+	<select id="checkUser" resultMap="userResultMap" >
+		SELECT
+		userId ,
+		userName ,
+		userDisplayName ,
+		userEmail ,
+		userCategory ,
+		userMobile
+		FROM system_user where userEmail=#{userEmail,jdbcType=VARCHAR} and userPassword=#{password,jdbcType=VARCHAR}
+
+	</select>
+
+	<select id="validatToken" resultType="java.lang.Integer" >
+		SELECT
+		count(1)
+		FROM user_token where token=#{token,jdbcType=VARCHAR}
+
+	</select>
+
+	<insert id="saveToken" useGeneratedKeys="false" parameterType="string">
+		<![CDATA[
+	      insert into user_token
+	      (
+				token
+		  )
+	      values
+	      (
+				#{token,jdbcType=VARCHAR}
+	      )
+	      ]]>
+	</insert>
+</mapper>

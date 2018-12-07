@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xmlns:task="http://www.springframework.org/schema/task"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:tx="http://www.springframework.org/schema/tx" xmlns:jdbc="http://www.springframework.org/schema/jdbc"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo"
+       xsi:schemaLocation="http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd
+	 http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd
+     http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.0.xsd
+     http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+     http://www.springframework.org/schema/jdbc http://www.springframework.org/schema/jdbc/spring-jdbc-3.0.xsd
+     http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+     http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+     http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util.xsd"
+       default-lazy-init="false">
+
+
+    <!--<bean id="messageProducer" class="com.digital.dance.framework.message.producer.impl.DefaultMQProducer">-->
+    <!--<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />-->
+    <!--<property name="producerGroup" value="${rocketmq.producerGroup}" />&lt;!&ndash; 这里只要保证集群之间不冲突，集群内部相同配置就可以了 &ndash;&gt;-->
+    <!--<property name="retryAnotherBrokerWhenNotStoreOK" value="false" />-->
+    <!--</bean>-->
+    <!---->
+    <!--<bean id="defaultMQPushConsumerMessageSelector" class="com.digital.dance.framework.message.selector.DefaultMQPushConsumerMessageSelector">-->
+    <!--<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />-->
+    <!--<property name="consumerGroup" value="${rocketmq.producerGroup}" />&lt;!&ndash; 这里只要保证集群之间不冲突，集群内部相同配置就可以了 &ndash;&gt;-->
+    <!--<property name="messageModel" value="CLUSTERING" />&lt;!&ndash; BROADCASTING、CLUSTERING &ndash;&gt;-->
+    <!--<property name="messageListener" value="ORDERLY" />&lt;!&ndash; CONCURRENTLY、ORDERLY &ndash;&gt;-->
+    <!--<property name="handlermap">-->
+    <!--<map>-->
+    <!--<entry key="session_in">&lt;!&ndash; 指定要订阅的topic &ndash;&gt;-->
+    <!--<bean class="com.digital.dance.home.DefaultMQMessageHandler" />&lt;!&ndash; 这里需要根据自己的需求实现接口 &ndash;&gt;-->
+    <!--</entry>-->
+    <!--<entry key="cas-authencate-logout">-->
+    <!--<bean class="com.digital.dance.framework.sso.handler.SSOLoginMessageHandler">-->
+    <!--<property name="ssologinManageHelper" ref="ssologinManageHelper"/>-->
+    <!--</bean>-->
+    <!--</entry>-->
+    <!--</map>-->
+    <!--</property>-->
+    <!--</bean>-->
+
+    <!--<bean id="defaultMQPullConsumerMessageSelector" class="com.digital.dance.framework.message.selector.DefaultMQPullConsumerMessageSelector">-->
+    <!--<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />-->
+    <!--<property name="consumerGroup" value="${rocketmq.producerGroup}" />&lt;!&ndash; 这里只要保证集群之间不冲突，集群内部相同配置就可以了 &ndash;&gt;-->
+    <!--<property name="messageModel" value="CLUSTERING" />&lt;!&ndash; BROADCASTING、CLUSTERING &ndash;&gt;	 -->
+    <!--<property name="messageListener" value="ORDERLY" />&lt;!&ndash; CONCURRENTLY、ORDERLY &ndash;&gt;   -->
+    <!--</bean>-->
+    <!---->
+    <!--<bean id="defaultMQPullConsumerMessageSelectorDamon" class="com.digital.dance.framework.message.selector.DefaultMQPullConsumerMessageSelector">-->
+    <!--<property name="namesrvAddr" value="${rocketmq.namesrvAddr}" />-->
+    <!--<property name="consumerGroup" value="${rocketmq.producerGroup}" />&lt;!&ndash; 这里只要保证集群之间不冲突，集群内部相同配置就可以了 &ndash;&gt;-->
+    <!--<property name="messageModel" value="CLUSTERING" />&lt;!&ndash; BROADCASTING、CLUSTERING &ndash;&gt;	 -->
+    <!--<property name="messageListener" value="ORDERLY" />&lt;!&ndash; CONCURRENTLY、ORDERLY &ndash;&gt;   -->
+    <!--</bean>-->
+    <!-- 添加调度的任务bean 配置对应的class -->
+    <!--<bean id="myPullSchedule" class="com.digital.dance.service.impl.LdapUserScheduleServiceImpl">-->
+    <!--<property name="ldapUserService" ref="ldapUserService" />-->
+    <!--</bean>-->
+    <!---->
+    <!--&lt;!&ndash;配置调度具体执行的方法 &ndash;&gt;-->
+    <!--<bean id="myPullDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">-->
+    <!--<property name="targetObject" ref="myPullSchedule" />-->
+    <!--<property name="targetMethod" value="pullLDAPUsers" />-->
+    <!--<property name="concurrent" value="false" />-->
+    <!--</bean>-->
+    <!---->
+    <!--&lt;!&ndash;配置调度执行的触发的时间 &ndash;&gt;-->
+    <!--<bean id="myPuLLTrigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">-->
+    <!--<property name="jobDetail" ref="myPullDetail" />-->
+    <!--<property name="cronExpression">-->
+    <!--&lt;!&ndash; <value>1.秒 2.分钟 3.小时 4.天 5.月 6.天（星期）</value> &ndash;&gt;-->
+    <!--&lt;!&ndash; 0 1/5 3-4 * * ?  &ndash;&gt;-->
+    <!--&lt;!&ndash; <value>0 0 1/1 13-18 5 ? 2015/1</value> &ndash;&gt;-->
+    <!--&lt;!&ndash; 每年的5月14，18号 1点开始，每隔1小时执行一次 &ndash;&gt;-->
+    <!--<value>0 13/5 1-2 * * ?</value>-->
+    <!--</property>-->
+    <!--</bean>-->
+    <!--&lt;!&ndash; quartz的调度工厂 调度工厂只能有一个，多个调度任务在list中添加 &ndash;&gt;-->
+    <!--<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">-->
+    <!--<property name="triggers">-->
+    <!--<list>-->
+    <!--&lt;!&ndash; 所有的调度列表 &ndash;&gt;-->
+    <!--<ref local="myPuLLTrigger" />-->
+    <!--</list>-->
+    <!--</property>-->
+    <!--</bean>-->
+
+
+</beans>

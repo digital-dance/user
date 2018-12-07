@@ -1,0 +1,67 @@
+﻿/*角色管理集成测试脚本*/
+
+add a role
+http://localhost:8080/user-war/role/rolevo?roleId=123456&roleName=asdfsdf&roleDescription=asdfsdf1
+
+http://localhost:8080/user-war/role/allroles
+
+http://localhost:8080/user-war/role/paged/roles?roleId=123456&roleName=asdfsdf&pageSize=1&pageIndex=1
+
+update System Roles
+http://localhost:8080/user-war/role/vos
+$.ajax({
+
+
+	type: "PUT",
+
+       
+	url: "http://127.0.0.1:8080/user-war/role/vos",
+
+       
+	data: JSON.stringify([{"roleName":"34343ssdsd1","roleId":"asdfsdf0","roleDescription":"asdfsdf1"},{"roleName":"3q4343ssdsd1","roleId":"asdfsdf1","roleDescription":"asdfsdf1"}]),
+ 
+contentType: "application/json; charset=utf-8",
+       
+	
+dataType: "json",
+
+       
+	success: function(data){
+
+ 
+            alert(JSON.stringify(data));
+
+
+	}
+
+     
+});
+delete System Roles
+http://localhost:8080/user-war/role/vos
+$.ajax({
+
+
+	type: "delete",
+
+       
+	url: "http://127.0.0.1:8080/user-war/role/vos",
+
+       
+	data: JSON.stringify([{"roleName:"34343ssdsd1","roleId":"asdfsdf0"},{"roleName":"3q4343ssdsd1","roleId":"asdfsdf1"}]),
+ 
+contentType: "application/json; charset=utf-8",
+       
+	
+dataType: "json",
+
+       
+	success: function(data){
+
+ 
+            alert(JSON.stringify(data));
+
+
+	}
+
+     
+});
