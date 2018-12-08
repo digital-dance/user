@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration scan="true">
 	<!-- 将Maven pom.xml的属性应用到logback中来, 需要在pom.xml中指定build resources -->
-	<property scope="system" name="APP_NAME" value="userservice" />
-	<property scope="system" name="SYSTEM_NAME" value="serverroom" />
+	<property scope="system" name="APP_NAME" value="user" />
+	<property scope="system" name="SYSTEM_NAME" value="digital_dance" />
 	<property scope="system" name="APP_VERSION" value="0.0.1-SNAPSHOT" />
 	<property scope="system" name="APP_ENV" value="development" />
 
-	<property scope="system" name="LOG_DIR" value="/app/serverroom_log/logs" />
+	<property scope="system" name="LOG_DIR" value="/app/digital_dance_log/logs" />
 
 	<appender name="ROOT_APPENDER" class="ch.qos.logback.core.rolling.RollingFileAppender">
 		<file>${LOG_DIR}/${SYSTEM_NAME}/${APP_NAME}/system.log</file>

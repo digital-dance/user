@@ -111,28 +111,43 @@ dataType: "json",
 
 $.ajax({
 
-
 	type: "POST",
-
 
 	url: "http://127.0.0.1:8008/user/login/user",
 
-
 	data: JSON.stringify({﻿"userEmail":"34343ssdsd1",﻿"password":"asdfsdf0"}),
 
-contentType: "application/json; charset=utf-8",
+    contentType: "application/json; charset=utf-8",
 
-
-dataType: "json",
-
+    dataType: "json",
+    xhrFields:{withCredentials:true},
 
 	success: function(data){
 
-
-            alert(JSON.stringify(data));
-
+        alert(JSON.stringify(data));
 
 	}
 
+});
+
+$.ajax({
+
+	type: "GET",
+
+	url: "http://127.0.0.1:8008/user/login/remotetoken?token=Di4vuYnmIbyCVw1su%2BbnjIxpyrL5YdshgZkQU2Ecgp1pACx9fuuiFjy0tQ5Xl2ENRtgOBLH30k4NUBXuzgWfdixSVkD0ID1o%2FtL6VV9emNg4YYFf%2FnflAlHsM%2FumAh0PNLTK%2FXF4Ds5ouY4q2WEQxan686dvc5doloTineW%2F34JUQpZMUht3z5j6cZhPNNAPnXs4R0dME58LzJ46D%2Bk3EQoAn%2FOJIaFc0xLbAfxE5ATQHoFxCjH9xX3s9yD8yLcLEIuTxtiWQff9V1XF78w982%2FpiJcnOEXn%2BnQWxxA8kHqQ6EWQ0Yu8STucJ3ecLm9OTAwdPIj7%2FfZE8C%2BbJ9%2Bj7w%3D%3D",
+
+	//data: JSON.stringify({﻿"userEmail":"34343ssdsd1",﻿"password":"asdfsdf0"}),
+
+    //contentType: "application/json; charset=utf-8",
+
+    //dataType: "json",
+    xhrFields:{withCredentials:true},
+
+	success: function(data){
+
+        alert(JSON.stringify(data));
+
+	}
 
 });
+

@@ -12,24 +12,20 @@
 		<dependency>
 			<groupId>com.digital.dance.framework</groupId>
 			<artifactId>framework.infrastructure.commons</artifactId>
-			<classifier>pg</classifier>
+			<!--<classifier>pg</classifier>-->
+			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.digital.dance.framework</groupId>
 			<artifactId>framework.sso</artifactId>
-		  	<classifier>pg</classifier>
+		  	<!--<classifier>pg</classifier>-->
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>com.digital.dance.commons</groupId>
 			<artifactId>commons.security</artifactId>
 		</dependency>
-		<dependency>
-			<groupId>com.digital.dance.commons</groupId>
-			<artifactId>commons.security</artifactId>
-			<!--<classifier>pg</classifier>-->
-			<version>0.0.1-SNAPSHOT</version>
-		</dependency>
+
 		<dependency>
 		  <groupId>com.digital.dance.framework</groupId>
 		  <artifactId>framework.mq</artifactId>
@@ -134,10 +130,6 @@
 		<dependency>
 			<groupId>com.google.zxing</groupId>
 			<artifactId>javase</artifactId>
-		</dependency>
-		<dependency>
-			<groupId>com.digital.dance.commons</groupId>
-			<artifactId>commons.security</artifactId>
 		</dependency>
 
 	</dependencies>

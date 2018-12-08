@@ -51,43 +51,43 @@
 		<dependency>
 			<groupId>com.digital.dance.framework</groupId>
 			<artifactId>framework.redis</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<!--<version>0.0.1-SNAPSHOT</version>-->
 		</dependency>
 		<dependency>
 			<groupId>com.digital.dance.framework</groupId>
 			<artifactId>framework.codis</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<!--<version>0.0.1-SNAPSHOT</version>-->
 		</dependency>
 		<dependency>
 			<groupId>com.digital.dance.framework</groupId>
 			<artifactId>framework.codis.impl</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<!--<version>0.0.1-SNAPSHOT</version>-->
 		</dependency>
 		<dependency>
 			<groupId>com.digital.dance.framework</groupId>
 			<artifactId>framework.infrastructure.commons</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<!--<version>0.0.1-SNAPSHOT</version>-->
 		</dependency>
 
 		<dependency>
 			<groupId>com.digital.dance.framework.identity</groupId>
 			<artifactId>framework-identity-commons</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<!--<version>0.0.1-SNAPSHOT</version>-->
 		</dependency>
 		<dependency>
 			<groupId>com.digital.dance.framework.identity</groupId>
 			<artifactId>framework-identity-dao</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<!--<version>0.0.1-SNAPSHOT</version>-->
 		</dependency>
 		<dependency>
 			<groupId>com.digital.dance.framework.identity</groupId>
 			<artifactId>framework-identity-impl</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<!--<version>0.0.1-SNAPSHOT</version>-->
 		</dependency>
 		<dependency>
 			<groupId>com.digital.dance.commons</groupId>
 			<artifactId>framework-identity-service</artifactId>
-			<version>0.0.1-SNAPSHOT</version>
+			<!--<version>0.0.1-SNAPSHOT</version>-->
 		</dependency>
 
 		<dependency>

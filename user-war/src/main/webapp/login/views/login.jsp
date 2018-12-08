@@ -30,12 +30,11 @@
 
     			type: "post",
     			
-    			url: "http://16.187.145.23/userservice/login/user?clientType=3",
+    			url: "http://127.0.0.1:8008/user/login/user?clientType=3",
     			data: JSON.stringify(user),
 
     			contentType: "application/json; charset=utf-8",
-    			       
-    				
+
     			dataType: "json",
     			success: function(ret){
     		 		document.getElementById("msgBox").innerHTML = JSON.stringify(ret);

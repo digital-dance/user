@@ -62,7 +62,7 @@ public class IndexController {
 
 		String ret = ssologinManageHelper.getApiLoginUrl();
 		if( loginInfo != null && !StringTools.isEmpty(callBackUrl)){
-			callBackUrl = URLDecoder.decode(callBackUrl, "UTF-8");
+//			callBackUrl = URLDecoder.decode(callBackUrl, "UTF-8");
 			String token = JSONUtils.toJson(loginInfo);
 			token = RSACoderUtil.encryptByPrivateKey(casPrivateKey, token);
 			token = URLEncoder.encode( token, "UTF-8" );
