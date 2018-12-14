@@ -28,7 +28,7 @@ public interface SystemRoleDao {
 	
 	/**
 	 * delete SystemRoles
-	 * @param userId
+	 * @param systemRoles
 	 * @return
 	 */
 	public Integer deleteSystemRoles(List<SystemRoleEO> systemRoles);
@@ -36,7 +36,7 @@ public interface SystemRoleDao {
 	
 	/**
 	 * update SystemRole
-	 * @param userId
+	 * @param systemRoles
 	 * @return
 	 */
 	public Integer updateSystemRoles(List<SystemRoleEO> systemRoles);

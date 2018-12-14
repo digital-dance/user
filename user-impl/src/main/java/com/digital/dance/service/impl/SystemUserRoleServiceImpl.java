@@ -31,7 +31,7 @@ public class SystemUserRoleServiceImpl implements SystemUserRoleService {
 	
 	/**
 	 * add system user roles
-	 * @param systemUserRole
+	 * @param systemUserRoles
 	 * @return
 	 */
 	public Integer addSystemUserRoles(List<SystemUserRoleBO> systemUserRoles){
@@ -88,6 +88,9 @@ public class SystemUserRoleServiceImpl implements SystemUserRoleService {
 		for(SystemUserRoleEO item : systemUserRoleEos) {
 			SystemUserRoleBO systemUserRoleBo = new SystemUserRoleBO();
 			BeanUtils.copyProperties(item, systemUserRoleBo);
+
+			systemUserRoleBo.setPageIndex(systemUserRole.getPageIndex());
+			systemUserRoleBo.setPageSize(systemUserRole.getPageSize());
 			systemUserRoleBos.add(systemUserRoleBo);
 		}
 		return systemUserRoleBos;
@@ -126,6 +129,9 @@ public class SystemUserRoleServiceImpl implements SystemUserRoleService {
 		for(SystemUserRoleEO item : systemUserRoleEos) {
 			SystemUserRoleBO systemUserRoleBo = new SystemUserRoleBO();
 			BeanUtils.copyProperties(item, systemUserRoleBo);
+
+			systemUserRoleBo.setPageIndex(systemUserRole.getPageIndex());
+			systemUserRoleBo.setPageSize(systemUserRole.getPageSize());
 			systemUserRoleBos.add(systemUserRoleBo);
 		}
 		return systemUserRoleBos;

@@ -49,9 +49,9 @@ public class UserServcieImplTest extends UnitTestBase {
 			if(userBO.getUserId().equals(userId)){
 				throwException = true;
 			}
-			if(userBO.getUserMobile().equals(userMobile)){
-				throwException = true;
-			}
+//			if(userBO.getUserMobile().equals(userMobile)){
+//				throwException = true;
+//			}
 			Integer ret = userService.addUser(user);
 		} catch (Exception e){
 			throwException = true;
@@ -67,7 +67,7 @@ public class UserServcieImplTest extends UnitTestBase {
 		//TODO userService.addUser test
 		UserBO user = new UserBO();
 		user.setUserId("111");
-		user.setUserDisplayName("Tomcat");
+		user.setUserName("Tomcat");
 		user.setUserName("Tomcat");
 		deleteUsers( user, userService );
 		Boolean throwException = false;
@@ -165,8 +165,8 @@ public class UserServcieImplTest extends UnitTestBase {
 		try {
 			userBOList = userService.findPagedUsers(new UserBO());
 			for (UserBO item : userBOList) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -185,18 +185,18 @@ public class UserServcieImplTest extends UnitTestBase {
 
 		UserBO userBO = new UserBO();
 		userBO.setUserId("sr_manager");
-		userBO.setUserCategory("00294DE4-03F9-4F1E-A3B4-898E57063DCD");
+		userBO.setPhone("00294DE4-03F9-4F1E-A3B4-898E57063DCD");
 
 		Boolean throwException = false;
 
 		try {
 			List<UserBO> userBOList2 = userService.findPagedUsers(userBO);
 			for (UserBO item : userBOList2) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 
 				org.junit.Assert.assertTrue(item.getUserId().equals("sr_manager")
-						&& item.getUserCategory().equals("00294DE4-03F9-4F1E-A3B4-898E57063DCD"));
+						&& item.getPhone().equals("00294DE4-03F9-4F1E-A3B4-898E57063DCD"));
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -215,7 +215,7 @@ public class UserServcieImplTest extends UnitTestBase {
 		UserBO userBO = new UserBO();
 		userBO.setPageIndex(0);
 		userBO.setPageSize(4);
-		userBO.setUserEmail("operatorsr@hpe.com");
+		userBO.setEmail("operatorsr@hpe.com");
 		userBO.setUserName("Operator SR");
 
 		Boolean throwException = false;
@@ -223,11 +223,11 @@ public class UserServcieImplTest extends UnitTestBase {
 		try {
 			List<UserBO> userBOList = userService.findPagedUsers(userBO);
 			for (UserBO item : userBOList) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 
 				org.junit.Assert.assertTrue(
-						item.getUserEmail().equals("operatorsr@hpe.com") && item.getUserName().equals("Operator SR"));
+						item.getEmail().equals("operatorsr@hpe.com") && item.getUserName().equals("Operator SR"));
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -248,8 +248,8 @@ public class UserServcieImplTest extends UnitTestBase {
 		try {
 			userBOList = userService.findPagedUsers(new UserBO());
 			for (UserBO item : userBOList) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -268,18 +268,18 @@ public class UserServcieImplTest extends UnitTestBase {
 
 		UserBO userBO = new UserBO();
 		userBO.setUserId("sr_manager");
-		userBO.setUserCategory("00294DE4-03F9-4F1E-A3B4-898E57063DCD");
+		userBO.setPhone("00294DE4-03F9-4F1E-A3B4-898E57063DCD");
 
 		Boolean throwException = false;
 
 		try {
 			List<UserBO> userBOList2 = userService.findPagedUsers(userBO);
 			for (UserBO item : userBOList2) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 
 				org.junit.Assert.assertTrue(item.getUserId().equals("sr_manager")
-						&& item.getUserCategory().equals("00294DE4-03F9-4F1E-A3B4-898E57063DCD"));
+						&& item.getPhone().equals("00294DE4-03F9-4F1E-A3B4-898E57063DCD"));
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -300,8 +300,8 @@ public class UserServcieImplTest extends UnitTestBase {
 		try {
 			userBOList = userService.searchPagedUsers(new UserBO());
 			for (UserBO item : userBOList) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -320,17 +320,17 @@ public class UserServcieImplTest extends UnitTestBase {
 
 		UserBO userBO = new UserBO();
 		userBO.setUserId("manager");
-		userBO.setUserCategory("00294DE4");
+		userBO.setPhone("00294DE4");
 
 		Boolean throwException = false;
 
 		try {
 			List<UserBO> userBOList2 = userService.searchPagedUsers(userBO);
 			for (UserBO item : userBOList2) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 				org.junit.Assert.assertTrue(
-						item.getUserId().contains("manager") && item.getUserCategory().contains("00294DE4"));
+						item.getUserId().contains("manager") && item.getPhone().contains("00294DE4"));
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -349,7 +349,7 @@ public class UserServcieImplTest extends UnitTestBase {
 		UserBO userBO = new UserBO();
 		userBO.setPageIndex(0);
 		userBO.setPageSize(4);
-		userBO.setUserEmail("@hpe.com");
+		userBO.setEmail("@hpe.com");
 		userBO.setUserName("SR");
 
 		Boolean throwException = false;
@@ -357,10 +357,10 @@ public class UserServcieImplTest extends UnitTestBase {
 		try {
 			List<UserBO> userBOList = userService.searchPagedUsers(userBO);
 			for (UserBO item : userBOList) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 				org.junit.Assert
-						.assertTrue(item.getUserEmail().contains("@hpe.com") && item.getUserName().contains("SR"));
+						.assertTrue(item.getEmail().contains("@hpe.com") && item.getUserName().contains("SR"));
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -381,8 +381,8 @@ public class UserServcieImplTest extends UnitTestBase {
 		try {
 			userBOList = userService.searchPagedUsers(new UserBO());
 			for (UserBO item : userBOList) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -401,17 +401,17 @@ public class UserServcieImplTest extends UnitTestBase {
 
 		UserBO userBO = new UserBO();
 		userBO.setUserId("manager");
-		userBO.setUserCategory("00294DE4");
+		userBO.setPhone("00294DE4");
 
 		Boolean throwException = false;
 
 		try {
 			List<UserBO> userBOList2 = userService.searchPagedUsers(userBO);
 			for (UserBO item : userBOList2) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 				org.junit.Assert.assertTrue(
-						item.getUserId().contains("manager") && item.getUserCategory().contains("00294DE4"));
+						item.getUserId().contains("manager") && item.getPhone().contains("00294DE4"));
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -499,10 +499,10 @@ public class UserServcieImplTest extends UnitTestBase {
 		UserBO userBO = new UserBO();
 		userBO.setUserId("userid1");
 		userBO.setUserName("usernameUpdate1");
-		userBO.setUserDisplayName("displaynameUpdate1");
-		userBO.setUserEmail("email@hpe.comUpdate1");
-		userBO.setUserCategory("usercategoryUpdate1");
-		userBO.setUserMobile("mobileUpdate1");
+		userBO.setUserName("displaynameUpdate1");
+		userBO.setEmail("email@hpe.comUpdate1");
+		userBO.setPhone("usercategoryUpdate1");
+//		userBO.setUserMobile("mobileUpdate1");
 		list.add(userBO);
 		userService.deleteUsers(list);
 		try {
@@ -535,10 +535,10 @@ public class UserServcieImplTest extends UnitTestBase {
 			UserBO userBO = new UserBO();
 			userBO.setUserId("uderid" + i);
 			userBO.setUserName("userName" + i);
-			userBO.setUserDisplayName("display" + i);
-			userBO.setUserEmail("email@hpe.com" + i);
-			userBO.setUserCategory("userCategory" + i);
-			userBO.setUserMobile("mobile" + i);
+			userBO.setUserName("display" + i);
+			userBO.setEmail("email@hpe.com" + i);
+			userBO.setPhone("userCategory" + i);
+//			userBO.setUserMobile("mobile" + i);
 			try {
 				judge=userService.addUser(userBO);
 			} catch (Exception e) {
@@ -549,10 +549,10 @@ public class UserServcieImplTest extends UnitTestBase {
 			if(judge!=1)
 				org.junit.Assert.assertTrue(false);
 			userBO.setUserName("usernameUpdate" + i);
-			userBO.setUserDisplayName("displayUpdate" + i);
-			userBO.setUserEmail("email@hpe.comUpdate" + i);
-			userBO.setUserCategory("usercategoryUpdate" + i);
-			userBO.setUserMobile("mobileUpdate" + i);
+			userBO.setUserName("displayUpdate" + i);
+			userBO.setEmail("email@hpe.comUpdate" + i);
+			userBO.setPhone("usercategoryUpdate" + i);
+//			userBO.setUserMobile("mobileUpdate" + i);
 			list.add(userBO);
 		}
 		judge=userService.updateUsers(list);

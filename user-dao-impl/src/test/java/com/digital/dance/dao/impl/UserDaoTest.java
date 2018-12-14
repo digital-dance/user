@@ -50,7 +50,7 @@ public class UserDaoTest extends UnitTestBase {
 			if(userEo.getUserName().equals(userName)){
 				throwException = true;
 			}
-			if(userEo.getUserDisplayName().equals(userDisplayName)){
+			if(userEo.getUserName().equals(userDisplayName)){
 				throwException = true;
 			}
 			Integer ret = userDao.addUser(user);
@@ -70,10 +70,9 @@ public class UserDaoTest extends UnitTestBase {
 		String userId = PrimaryKeyGenerator.generatePrimaryKey("system_user");
 		user.setUserId(userId);
 		user.setUserName("Tom");
-		user.setUserDisplayName("Tomcat");
-		user.setUserEmail("@hpe.com");
-		user.setUserCategory("1");
-		user.setUserMobile("12345");
+		user.setUserName("Tomcat");
+		user.setEmail("@hpe.com");
+
 		try {
 			if(user!=null){
 			Integer userEo = userDao.addUser(user);
@@ -160,8 +159,8 @@ public class UserDaoTest extends UnitTestBase {
 		try {
 			userEoList = userDao.findPagedUsers(null);
 			for (UserEO item : userEoList) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() );
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -180,18 +179,17 @@ public class UserDaoTest extends UnitTestBase {
 
 		UserEO userEo = new UserEO();
 		userEo.setUserId("sr_manager");
-		userEo.setUserCategory("00294DE4-03F9-4F1E-A3B4-898E57063DCD");
 
 		Boolean throwException = false;
 
 		try {
 			List<UserEO> userEoList2 = userDao.findPagedUsers(userEo);
 			for (UserEO item : userEoList2) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() );
 
 				org.junit.Assert.assertTrue(item.getUserId().equals("sr_manager")
-						&& item.getUserCategory().equals("00294DE4-03F9-4F1E-A3B4-898E57063DCD"));
+						);
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -210,7 +208,7 @@ public class UserDaoTest extends UnitTestBase {
 		UserEO userEo = new UserEO();
 		userEo.setPageIndex(0);
 		userEo.setPageSize(4);
-		userEo.setUserEmail("operatorsr@hpe.com");
+		userEo.setEmail("operatorsr@hpe.com");
 		userEo.setUserName("Operator SR");
 
 		Boolean throwException = false;
@@ -218,11 +216,11 @@ public class UserDaoTest extends UnitTestBase {
 		try {
 			List<UserEO> userEoList = userDao.findPagedUsers(userEo);
 			for (UserEO item : userEoList) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() );
 
 				org.junit.Assert.assertTrue(
-						item.getUserEmail().equals("operatorsr@hpe.com") && item.getUserName().equals("Operator SR"));
+						item.getEmail().equals("operatorsr@hpe.com") && item.getUserName().equals("Operator SR"));
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -243,8 +241,8 @@ public class UserDaoTest extends UnitTestBase {
 		try {
 			userEoList = userDao.findPagedUsers(null);
 			for (UserEO item : userEoList) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() );
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -263,18 +261,16 @@ public class UserDaoTest extends UnitTestBase {
 
 		UserEO userEo = new UserEO();
 		userEo.setUserId("sr_manager");
-		userEo.setUserCategory("00294DE4-03F9-4F1E-A3B4-898E57063DCD");
 
 		Boolean throwException = false;
 
 		try {
 			List<UserEO> userEoList2 = userDao.findPagedUsers(userEo);
 			for (UserEO item : userEoList2) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 
-				org.junit.Assert.assertTrue(item.getUserId().equals("sr_manager")
-						&& item.getUserCategory().equals("00294DE4-03F9-4F1E-A3B4-898E57063DCD"));
+				org.junit.Assert.assertTrue( item.getUserId().equals("sr_manager") );
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -295,8 +291,8 @@ public class UserDaoTest extends UnitTestBase {
 		try {
 			userEoList = userDao.searchPagedUsers(null);
 			for (UserEO item : userEoList) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -315,17 +311,17 @@ public class UserDaoTest extends UnitTestBase {
 
 		UserEO userEo = new UserEO();
 		userEo.setUserId("manager");
-		userEo.setUserCategory("00294DE4");
+		userEo.setPhone("00294DE4");
 
 		Boolean throwException = false;
 
 		try {
 			List<UserEO> userEoList2 = userDao.searchPagedUsers(userEo);
 			for (UserEO item : userEoList2) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 				org.junit.Assert.assertTrue(
-						item.getUserId().contains("manager") && item.getUserCategory().contains("00294DE4"));
+						item.getUserId().contains("manager") && item.getPhone().contains("00294DE4"));
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -344,7 +340,7 @@ public class UserDaoTest extends UnitTestBase {
 		UserEO userEo = new UserEO();
 		userEo.setPageIndex(0);
 		userEo.setPageSize(4);
-		userEo.setUserEmail("@hpe.com");
+		userEo.setEmail("@hpe.com");
 		userEo.setUserName("SR");
 
 		Boolean throwException = false;
@@ -352,10 +348,10 @@ public class UserDaoTest extends UnitTestBase {
 		try {
 			List<UserEO> userEoList = userDao.searchPagedUsers(userEo);
 			for (UserEO item : userEoList) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 				org.junit.Assert
-						.assertTrue(item.getUserEmail().contains("@hpe.com") && item.getUserName().contains("SR"));
+						.assertTrue(item.getEmail().contains("@hpe.com") && item.getUserName().contains("SR"));
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -376,8 +372,8 @@ public class UserDaoTest extends UnitTestBase {
 		try {
 			userEoList = userDao.searchPagedUsers(null);
 			for (UserEO item : userEoList) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -396,17 +392,17 @@ public class UserDaoTest extends UnitTestBase {
 
 		UserEO userEo = new UserEO();
 		userEo.setUserId("manager");
-		userEo.setUserCategory("00294DE4");
+		userEo.setPhone("00294DE4");
 
 		Boolean throwException = false;
 
 		try {
 			List<UserEO> userEoList2 = userDao.searchPagedUsers(userEo);
 			for (UserEO item : userEoList2) {
-				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserDisplayName() + ","
-						+ item.getUserEmail() + "," + item.getUserCategory());
+				System.out.println(item.getUserId() + "," + item.getUserName() + "," + item.getUserName() + ","
+						+ item.getEmail() + "," + item.getPhone());
 				org.junit.Assert.assertTrue(
-						item.getUserId().contains("manager") && item.getUserCategory().contains("00294DE4"));
+						item.getUserId().contains("manager") && item.getPhone().contains("00294DE4"));
 			}
 		} catch (Exception e) {
 			throwException = true;
@@ -494,10 +490,10 @@ public class UserDaoTest extends UnitTestBase {
 		UserEO userEO = new UserEO();
 		userEO.setUserId("userid1");
 		userEO.setUserName("usernameUpdate1");
-		userEO.setUserDisplayName("displaynameUpdate1");
-		userEO.setUserEmail("email@hpe.comUpdate1");
-		userEO.setUserCategory("usercategoryUpdate1");
-		userEO.setUserMobile("mobileUpdate1");
+		userEO.setUserName("displaynameUpdate1");
+		userEO.setEmail("email@hpe.comUpdate1");
+		userEO.setPhone("usercategoryUpdate1");
+//		userEO.setUserMobile("mobileUpdate1");
 		list.add(userEO);
 		userDao.deleteUsers(list);
 		judge=userDao.addUser(userEO);
@@ -524,18 +520,18 @@ public class UserDaoTest extends UnitTestBase {
 			UserEO userEO = new UserEO();
 			userEO.setUserId("uderid" + i);
 			userEO.setUserName("userName" + i);
-			userEO.setUserDisplayName("display" + i);
-			userEO.setUserEmail("email@hpe.com" + i);
-			userEO.setUserCategory("userCategory" + i);
-			userEO.setUserMobile("mobile" + i);
+			userEO.setUserName("display" + i);
+			userEO.setEmail("email@hpe.com" + i);
+			userEO.setPhone("userCategory" + i);
+//			userEO.setUserMobile("mobile" + i);
 			judge=userDao.addUser(userEO);
 			if(judge!=1)
 				org.junit.Assert.assertTrue(false);
 			userEO.setUserName("usernameUpdate" + i);
-			userEO.setUserDisplayName("displayUpdate" + i);
-			userEO.setUserEmail("email@hpe.comUpdate" + i);
-			userEO.setUserCategory("usercategoryUpdate" + i);
-			userEO.setUserMobile("mobileUpdate" + i);
+			userEO.setUserName("displayUpdate" + i);
+			userEO.setEmail("email@hpe.comUpdate" + i);
+			userEO.setPhone("usercategoryUpdate" + i);
+//			userEO.setUserMobile("mobileUpdate" + i);
 			list.add(userEO);
 		}
 		judge=userDao.updateUsers(list);

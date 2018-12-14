@@ -131,7 +131,7 @@ public class LoginController
 
         try
         {
-            String userEmail = userVo.getUserEmail();
+            String userEmail = userVo.getEmail();
             String psw = userVo.getPassword();
             String md5Psw = Md5Util.getMD5(psw);
 //			UserBO pUB = new UserBO();
@@ -449,7 +449,7 @@ public class LoginController
         reVo.setResult("");
         LoginInfo loginInfo = new LoginInfo();
         loginInfo.setUserId("1234567890");
-        loginInfo.setUserEmail("2506225465@qq.com");
+        loginInfo.setEmail("2506225465@qq.com");
         loginInfo.setUserName("2506225465@qq.com");
         try
         {

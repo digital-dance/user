@@ -14,7 +14,7 @@ public interface SystemUserRoleService {
 	
 	/**
 	 * add system user roles
-	 * @param systemUserRole
+	 * @param systemUserRoles
 	 * @return
 	 */
 	public Integer addSystemUserRoles(List<SystemUserRoleBO> systemUserRoles);

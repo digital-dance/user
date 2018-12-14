@@ -63,6 +63,9 @@ public class SystemRoleServiceImpl implements SystemRoleService {
 		for(SystemRoleEO ite : systemRoleEos){
 			SystemRoleBO systemRoleBo = new SystemRoleBO();
 			BeanUtils.copyProperties(ite, systemRoleBo);
+
+			systemRoleBo.setPageIndex(systemRole.getPageIndex());
+			systemRoleBo.setPageSize(systemRole.getPageSize());
 			systemRoleBos.add(systemRoleBo);
 		}
 		return systemRoleBos;
@@ -123,6 +126,9 @@ public class SystemRoleServiceImpl implements SystemRoleService {
 		for(SystemRoleEO item : systemRoleEos) {
 			SystemRoleBO systemRoleBo = new SystemRoleBO();
 			BeanUtils.copyProperties(item, systemRoleBo);
+
+			systemRoleBo.setPageIndex(systemRole.getPageIndex());
+			systemRoleBo.setPageSize(systemRole.getPageSize());
 			systemRoleBos.add(systemRoleBo);
 		}
 		return systemRoleBos;

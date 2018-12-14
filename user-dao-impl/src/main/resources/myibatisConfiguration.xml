@@ -17,7 +17,7 @@
         <typeAlias type="com.digital.dance.entity.SystemRoleEO" alias="systemRoleEO"/>
         <typeAlias type="com.digital.dance.entity.UserEO" alias="userEO"/>
         <typeAlias type="com.digital.dance.entity.SystemUserRoleEO" alias="systemUserRoleEO"/>
-        <typeAlias type="com.digital.dance.entity.UserCategoryEO" alias="userCategoryEO"/>
+        <!--<typeAlias type="com.digital.dance.entity.UserCategoryEO" alias="userCategoryEO"/>-->
         <typeAlias type="com.digital.dance.framework.identity.entity.IdentityEO" alias="identityEO"/>
     </typeAliases>
     

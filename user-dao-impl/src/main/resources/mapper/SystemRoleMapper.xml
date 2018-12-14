@@ -2,65 +2,78 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.digital.dance.dao.SystemRoleDao">
 	<resultMap id="systemRoleResultMap" type="com.digital.dance.entity.SystemRoleEO">
-		<id column="roleId" property="roleId" jdbcType="VARCHAR"/>
-		<result column="roleName" property="roleName" jdbcType="VARCHAR"/>
-		<result column="roleDesc" property="roleDesc" jdbcType="VARCHAR"/>
+		<id column="sysOrgRoleId" jdbcType="VARCHAR" property="sysOrgRoleId" />
+		<result column="orgId" jdbcType="VARCHAR" property="orgId" />
+		<result column="departmentId" jdbcType="VARCHAR" property="departmentId" />
+		<result column="roleId" jdbcType="VARCHAR" property="roleId" />
+		<result column="state" jdbcType="INTEGER" property="state" />
+		<result column="insertOn" jdbcType="TIMESTAMP" property="insertOn" />
+		<result column="insertBy" jdbcType="VARCHAR" property="insertBy" />
+		<result column="updateOn" jdbcType="TIMESTAMP" property="updateOn" />
+		<result column="updateBy" jdbcType="VARCHAR" property="updateBy" />
 	</resultMap>
-	
+	<sql id="Base_Select_List">
+		select a.sysOrgRoleId, a.orgId, a.departmentId, a.roleId, a.state, a.insertOn, a.insertBy, a.updateOn, a.updateBy
+		, b.roleCode, b.roleName, b.orgCategoryCode, b.orgCategoryName, b.roleDesc, b.isDefault
+		from sys_org_role a inner join sys_role b on a.roleId = b.roleId
+	</sql>
 	<!-- 插入角色-->
 	<insert id="addSystemRole" keyProperty="roleId" useGeneratedKeys="false" parameterType="systemRoleEO">
-        insert into user_role
-        (roleId,roleName,roleDesc) values
-        (   #{roleId,jdbcType=VARCHAR},
-            #{roleName,jdbcType=VARCHAR},
-            #{roleDesc,jdbcType=VARCHAR})
+		insert into sys_org_role (sysOrgRoleId, orgId, departmentId,
+		roleId, state, insertOn,
+		insertBy, updateOn, updateBy
+		)
+		values (#{sysOrgRoleId,jdbcType=VARCHAR}, #{orgId,jdbcType=VARCHAR}, #{departmentId,jdbcType=VARCHAR},
+		#{roleId,jdbcType=VARCHAR}, #{state,jdbcType=INTEGER}, #{insertOn,jdbcType=TIMESTAMP},
+		#{insertBy,jdbcType=VARCHAR}, #{updateOn,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR}
+		)
   </insert>   
 
   <!-- 查询角色-->
-  <select id="findSystemRoleByRoleName" resultMap="systemRoleResultMap" parameterType="string">
-		select roleId,roleName,roleDesc from user_role where roleName =#{roleName,jdbcType=VARCHAR} limit 1
+  <select id="findSystemRoleByRoleName" parameterType="string">
+	  <include refid="Base_Select_List" />  where b.roleName =#{roleName,jdbcType=VARCHAR}
   </select>
-  <select id="findSystemRoleByRoleId" resultMap="systemRoleResultMap" parameterType="string">
-		select roleId,roleName,roleDesc from user_role where roleId =#{roleId,jdbcType=VARCHAR} limit 1
+  <select id="findSystemRoleByRoleId" parameterType="string">
+	  <include refid="Base_Select_List" />  where a.roleId =#{roleId,jdbcType=VARCHAR} limit 1
   </select>
   
   <select id="findPagedSystemRoles" resultMap="systemRoleResultMap" parameterType="systemRoleEO">
-		select roleId,roleName,roleDesc from user_role where 1=1
+	  <include refid="Base_Select_List" />  where 1=1
 		<if test="roleId != null">
-		    and roleId =#{roleId,jdbcType=VARCHAR}
+		    and a.roleId =#{roleId,jdbcType=VARCHAR}
 	    </if>
 		<if test="roleName != null">
-		    and roleName =#{roleName,jdbcType=VARCHAR}
+		    and b.roleName =#{roleName,jdbcType=VARCHAR}
 		</if>
 		 limit #{pageSize,jdbcType=INTEGER} offset #{offsetNum,jdbcType=INTEGER} 
   </select>
   <select id="findAllSystemRoles" resultMap="systemRoleResultMap" parameterType="systemRoleEO">
-		select roleId,roleName,roleDesc from user_role where 1=1
+	  <include refid="Base_Select_List" />  where 1=1
 		<if test="roleId != null">
-		    and roleId =#{roleId,jdbcType=VARCHAR}
+		    and a.roleId =#{roleId,jdbcType=VARCHAR}
 	    </if>
 		<if test="roleName != null">
-		    and roleName =#{roleName,jdbcType=VARCHAR}
+		    and b.roleName =#{roleName,jdbcType=VARCHAR}
 		</if>
   </select>
   
  <select id="searchPagedSystemRoles" resultMap="systemRoleResultMap" parameterType="systemRoleEO">
-		select roleId,roleName,roleDesc from user_role where 1=1
+	 <include refid="Base_Select_List" />  where 1=1
 		<if test="roleId != null">
-			and roleId like concat(concat('%',#{roleId,jdbcType=VARCHAR}),'%')
+			and b.roleId like concat(concat('%',#{roleId,jdbcType=VARCHAR}),'%')
 		</if>
 		<if test="roleName != null">
-			and roleName like concat(concat('%',#{roleName,jdbcType=VARCHAR}),'%')
+			and b.roleName like concat(concat('%',#{roleName,jdbcType=VARCHAR}),'%')
 		</if>
 		limit #{pageSize,jdbcType=INTEGER} offset #{offsetNum,jdbcType=INTEGER}
   </select>
   <select id="searchAllSystemRoles" resultMap="systemRoleResultMap" parameterType="systemRoleEO">
-		select roleId,roleName,roleDesc from user_role where 1=1
+	  <include refid="Base_Select_List" />  where 1=1
 		<if test="roleId != null">
-			and roleId like concat(concat('%',#{roleId,jdbcType=VARCHAR}),'%')
+			and b.roleId like concat(concat('%',#{roleId,jdbcType=VARCHAR}),'%')
 		</if>
 		<if test="roleName != null">
-			and roleName like concat(concat('%',#{roleName,jdbcType=VARCHAR}),'%')
+			and b.roleName like concat(concat('%',#{roleName,jdbcType=VARCHAR}),'%')
 		</if>
   </select>
   
@@ -68,16 +81,17 @@
 	     <!-- update多角色SQL-->
 	     <foreach item="item" collection="list" index="index" separator=";">	    
 		     update user_role
-		     set roleName = #{item.roleName,jdbcType=VARCHAR}, roleDesc = #{item.roleDesc,jdbcType=VARCHAR}
-		     where roleId = #{item.roleId,jdbcType=VARCHAR}
-	     </foreach>
+		     set orgId = #{item.roleName,jdbcType=VARCHAR}, departmentId = #{item.departmentId,jdbcType=VARCHAR}
+			 state = #{item.state,jdbcType=VARCHAR}, roleId = #{item.roleId,jdbcType=VARCHAR}
+			 where sysOrgRoleId = #{item.sysOrgRoleId,jdbcType=VARCHAR}
+		 </foreach>
 	</update>   
   
 	<delete id="deleteSystemRoles" parameterType="systemRoleEO">
 		<!-- delete多角色SQL-->
 	    <foreach item="item" collection="list" index="index" separator=";">	    
-		     delete from user_role
-		     where roleId = #{item.roleId,jdbcType=VARCHAR}
+		     delete from sys_org_role
+		     where sysOrgRoleId = #{item.sysOrgRoleId,jdbcType=VARCHAR}
 	    </foreach>
 	</delete>
 </mapper>

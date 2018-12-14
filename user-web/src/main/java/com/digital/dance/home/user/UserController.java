@@ -166,6 +166,41 @@ public class UserController
         
         return reVo;
     }
+    /**
+     * find User by userId
+     *
+     * @param request
+     * @param response
+     * @return user info in ResponseVo json object
+     * @throws Exception
+     */
+    @RequestMapping("primarykey")
+    @ResponseBody
+    public ResponseVo generatePrimaryKey(HttpServletRequest request,
+                                       HttpServletResponse response, String table) throws Exception
+    {
+        ResponseVo reVo = new ResponseVo();
+        reVo.setResult("");
+
+        try
+        {
+            String primaryKey = PrimaryKeyGenerator.generatePrimaryKey("sys_user");
+            reVo.setResult(primaryKey);
+        }
+        catch (Exception e)
+        {
+            log.error(UserController.class.getName() + ".generatePrimaryKey:", e);
+            e.printStackTrace();
+            reVo.setCode(Constants.RETURN_CODE_FAILED);
+            reVo.setMsg(e.getMessage());
+            reVo.setResult(null);
+            return reVo;
+        }
+        reVo.setCode(Constants.RETURN_CODE_SUCCESS);
+        reVo.setMsg(Constants.SUCCESS_MSG);
+
+        return reVo;
+    }
     
     /**
      * find all Users

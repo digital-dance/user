@@ -231,7 +231,7 @@ public class SystemUserRoleDaoTest extends UnitTestBase {
 			SystemUserRoleEO systemUserRoleEo = new SystemUserRoleEO();
 			List<SystemUserRoleEO> systemUserRoleEoList = systemUserRoleDao.findPagedSystemUserRoles(systemUserRoleEo);
 			for (SystemUserRoleEO item : systemUserRoleEoList) {
-				System.out.println(item.getRoleId() + "," + item.getRoleName());
+				System.out.println(item.getRoleId() + "," + item.getOrgId());
 			}
 		} catch (Exception e) {
 			throwException = true;

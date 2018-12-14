@@ -230,7 +230,7 @@ public class SystemUserRoleServiceImplTest extends UnitTestBase {
 			SystemUserRoleBO systemUserRoleBo = new SystemUserRoleBO();
 			List<SystemUserRoleBO> systemUserRoleBoList = systemUserRoleService.findPagedSystemUserRoles(systemUserRoleBo);
 			for (SystemUserRoleBO item : systemUserRoleBoList) {
-				System.out.println(item.getRoleId() + "," + item.getRoleName());
+				System.out.println(item.getRoleId() + "," + item.getOrgId());
 			}
 		} catch (Exception e) {
 			throwException = true;

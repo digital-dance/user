@@ -2,24 +2,33 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.digital.dance.dao.SystemUserRoleDao">
     <resultMap id="systemUserRoleMap" type="systemUserRoleEO">
-        <result column="userId" property="userId" jdbcType="VARCHAR"/>
-        <result column="roleId" property="roleId" jdbcType="VARCHAR"/>
+        <id column="sysUserRoleId" jdbcType="VARCHAR" property="sysUserRoleId" />
+        <result column="sysOrgRoleId" jdbcType="VARCHAR" property="sysOrgRoleId" />
+        <result column="orgId" jdbcType="VARCHAR" property="orgId" />
+        <result column="departmentId" jdbcType="VARCHAR" property="departmentId" />
+        <result column="roleId" jdbcType="VARCHAR" property="roleId" />
+        <result column="userId" jdbcType="VARCHAR" property="userId" />
+        <result column="state" jdbcType="INTEGER" property="state" />
+        <result column="insertOn" jdbcType="TIMESTAMP" property="insertOn" />
+        <result column="insertBy" jdbcType="VARCHAR" property="insertBy" />
+        <result column="updateOn" jdbcType="TIMESTAMP" property="updateOn" />
+        <result column="updateBy" jdbcType="VARCHAR" property="updateBy" />
     </resultMap>
-    
-    
+
+    <sql id="Base_Select_List">
+        select d.sysUserRoleId, d.userId, d.state, d.sysOrgRoleId, a.orgId, a.departmentId, a.roleId, d.state, d.insertOn, d.insertBy, d.updateOn, d.updateBy
+
+        from sys_user_role d inner join  sys_org_role a on d.sysOrgRoleId = a.sysOrgRoleId
+    </sql>
 	<!-- 插入用户的角色-->
 	<insert id="addSystemUserRole" useGeneratedKeys="false" parameterType="systemUserRoleEO">
 	       <![CDATA[
-	      insert into system_user_role
-	      (
-				userId            ,
-				roleId
-	      )
-	      values
-	      (
-				#{userId,jdbcType=VARCHAR},
-				#{roleId,jdbcType=VARCHAR}
-	      )
+	        insert into sys_user_role (sysUserRoleId, sysOrgRoleId, userId,
+              state, insertOn, insertBy,
+              updateOn, updateBy)
+            values (#{sysUserRoleId,jdbcType=VARCHAR}, #{sysOrgRoleId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+              #{state,jdbcType=INTEGER}, #{insertOn,jdbcType=TIMESTAMP}, #{insertBy,jdbcType=VARCHAR},
+              #{updateOn,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
 	      ]]>
 	</insert>  
 	  
@@ -27,89 +36,69 @@
 	<insert id="addSystemUserRoles" useGeneratedKeys="false" parameterType="systemRoleEO">
         <!-- 批量插入用户的角色SQL-->
         <foreach item="item" collection="list" index="index" separator=";">
-       		insert into system_user_role
-       		(
-       			userId			,
-       			roleId
-       		)
-       		values
-       		(
-       			#{item.userId,jdbcType=VARCHAR},
-       			#{item.roleId,jdbcType=VARCHAR}
-       		)
+            insert into sys_user_role (sysUserRoleId, sysOrgRoleId, userId,
+                state, insertOn, insertBy,
+                updateOn, updateBy)
+            values (#{sysUserRoleId,jdbcType=VARCHAR}, #{sysOrgRoleId,jdbcType=VARCHAR}, #{userId,jdbcType=VARCHAR},
+                #{state,jdbcType=INTEGER}, #{insertOn,jdbcType=TIMESTAMP}, #{insertBy,jdbcType=VARCHAR},
+                #{updateOn,jdbcType=TIMESTAMP}, #{updateBy,jdbcType=VARCHAR})
        </foreach>
   	</insert>  
 	
     <select id="findSystemUserRoleByUserId" resultMap="systemUserRoleMap" parameterType="string">
-       SELECT userId,roleId FROM system_user_role
-       where userId=#{userId,jdbcType=VARCHAR}
+        <include refid="Base_Select_List" />
+        where d.userId=#{userId,jdbcType=VARCHAR}
        limit 1
     </select>
     <select id="findSystemUserRoleByRoleId" resultMap="systemUserRoleMap" parameterType="string">
-       SELECT userId,roleId FROM system_user_role
-       where roleId=#{roleId,jdbcType=VARCHAR}
+        <include refid="Base_Select_List" />
+        where a.roleId=#{roleId,jdbcType=VARCHAR}
        limit 1
     </select>
     	  
     <select id="findPagedSystemUserRoles" resultMap="systemUserRoleMap" parameterType="systemUserRoleEO">
-        SELECT * FROM system_user_role ur
-        join user_role r
-        on ur.roleId = r.roleId
-      	join system_user u
-	    on ur.userId = u.userId
+        <include refid="Base_Select_List" />
 	    where 1=1
 		<if test="roleId != null">
-		    and ur.roleId =#{roleId,jdbcType=VARCHAR}
+		    and a.roleId =#{roleId,jdbcType=VARCHAR}
 	    </if>
 		<if test="userId != null">
-		    and ur.userId =#{userId,jdbcType=VARCHAR}
+		    and d.userId =#{userId,jdbcType=VARCHAR}
 		</if> 
 		limit #{pageSize,jdbcType=INTEGER} offset #{offsetNum,jdbcType=INTEGER} 
     </select>
     
     <select id="findAllSystemUserRoles" resultMap="systemUserRoleMap" parameterType="systemUserRoleEO">
-        SELECT * FROM system_user_role ur
-        join user_role r
-        on ur.roleId = r.roleId
-        join system_user u
-	    on ur.userId = u.userId
+        <include refid="Base_Select_List" />
 	    where 1=1
 		<if test="roleId != null">
-		    and ur.roleId =#{roleId,jdbcType=VARCHAR}
+		    and a.roleId =#{roleId,jdbcType=VARCHAR}
 	    </if>
 		<if test="userId != null">
-		    and ur.userId =#{userId,jdbcType=VARCHAR}
+		    and d.userId =#{userId,jdbcType=VARCHAR}
 		</if> 
     </select>
     
  	<select id="searchPagedSystemUserRoles" resultMap="systemUserRoleMap" parameterType="systemUserRoleEO">
-       SELECT * FROM system_user_role ur
-       join user_role r
-       on ur.roleId = r.roleId
-       join system_user u
-       on ur.userId = u.userId
+        <include refid="Base_Select_List" />
        where 1=1
        <if test="roleId != null">
-       		and ur.roleId like concat(concat('%',#{roleId,jdbcType=VARCHAR}),'%')
+       		and a.roleId like concat(concat('%',#{roleId,jdbcType=VARCHAR}),'%')
        </if>
        <if test="userId != null">
-       		and ur.userId like concat(concat('%',#{userId,jdbcType=VARCHAR}),'%')
+       		and d.userId like concat(concat('%',#{userId,jdbcType=VARCHAR}),'%')
        </if>
        limit #{pageSize,jdbcType=INTEGER} offset #{offsetNum,jdbcType=INTEGER}
     </select>
     
     <select id="searchAllSystemUserRoles" resultMap="systemUserRoleMap" parameterType="systemUserRoleEO">
-       SELECT * FROM system_user_role ur
-       join user_role r
-       on ur.roleId = r.roleId
-       join system_user u
-       on ur.userId = u.userId
+        <include refid="Base_Select_List" />
        where 1=1
        <if test="roleId != null">
-           and ur.roleId like concat(concat('%',#{roleId,jdbcType=VARCHAR}),'%')
+           and a.roleId like concat(concat('%',#{roleId,jdbcType=VARCHAR}),'%')
        </if>
        <if test="userId != null">
-       	   and ur.userId like concat(concat('%',#{userId,jdbcType=VARCHAR}),'%')
+       	   and d.userId like concat(concat('%',#{userId,jdbcType=VARCHAR}),'%')
        </if>
     </select>
     
@@ -121,7 +110,7 @@
 			<if test="item.roleId != null or item.userId != null" >
 				DELETE FROM system_user_role where 1=1
 				<if test="item.roleId != null">
-					and roleId = #{item.roleId,jdbcType=VARCHAR}
+					and sysOrgRoleId = #{item.roleId,jdbcType=VARCHAR}
 				</if>
 				<if test="item.userId != null">
 					and userId = #{item.userId,jdbcType=VARCHAR}

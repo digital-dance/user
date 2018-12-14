@@ -1,109 +1,119 @@
 package com.digital.dance.bo;
 
-public class SystemUserRoleBO extends UserServiceBaseBO implements java.io.Serializable {
-	private String userId ; 
-	private String roleId ;
-	private String userName;
-	private String userDisplayName;
-	private String userEmail;
-	private String userCategory;
-	private String userMobile; 
-	private String roleName ;
+import java.io.Serializable;
+import java.util.Date;
+
+public class SystemUserRoleBO extends UserServiceBaseBO implements Serializable {
 	/**
-	 * @return the userId
+	 *
 	 */
-	public String getUserId() {
-		return userId;
+	private static final long serialVersionUID = -7548265387019896426L;
+	private String sysUserRoleId;
+
+	private String sysOrgRoleId;
+
+	private String orgId;
+
+	private String departmentId;
+
+	private String roleId;
+
+	private String userId;
+
+	private Integer state;
+
+	private Date insertOn;
+
+	private String insertBy;
+
+	private Date updateOn;
+
+	private String updateBy;
+
+	public String getSysUserRoleId() {
+		return sysUserRoleId;
 	}
-	/**
-	 * @param userId the userId to set
-	 */
-	public void setUserId(String userId) {
-		this.userId = userId;
+
+	public void setSysUserRoleId(String sysUserRoleId) {
+		this.sysUserRoleId = sysUserRoleId == null ? null : sysUserRoleId.trim();
 	}
-	/**
-	 * @return the roleId
-	 */
+
+	public String getSysOrgRoleId() {
+		return sysOrgRoleId;
+	}
+
+	public void setSysOrgRoleId(String sysOrgRoleId) {
+		this.sysOrgRoleId = sysOrgRoleId == null ? null : sysOrgRoleId.trim();
+	}
+	public String getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(String orgId) {
+		this.orgId = orgId == null ? null : orgId.trim();
+	}
+
+	public String getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(String departmentId) {
+		this.departmentId = departmentId == null ? null : departmentId.trim();
+	}
+
 	public String getRoleId() {
 		return roleId;
 	}
-	/**
-	 * @param roleId the roleId to set
-	 */
+
 	public void setRoleId(String roleId) {
-		this.roleId = roleId;
-	}
-	/**
-	 * @return the userName
-	 */
-	public String getUserName() {
-		return userName;
-	}
-	/**
-	 * @param userName the userName to set
-	 */
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	/**
-	 * @return the userDisplayName
-	 */
-	public String getUserDisplayName() {
-		return userDisplayName;
-	}
-	/**
-	 * @param userDisplayName the userDisplayName to set
-	 */
-	public void setUserDisplayName(String userDisplayName) {
-		this.userDisplayName = userDisplayName;
-	}
-	/**
-	 * @return the userEmail
-	 */
-	public String getUserEmail() {
-		return userEmail;
-	}
-	/**
-	 * @param userEmail the userEmail to set
-	 */
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
-	/**
-	 * @return the userCategory
-	 */
-	public String getUserCategory() {
-		return userCategory;
-	}
-	/**
-	 * @param userCategory the userCategory to set
-	 */
-	public void setUserCategory(String userCategory) {
-		this.userCategory = userCategory;
-	}
-	/**
-	 * @return the userMobile
-	 */
-	public String getUserMobile() {
-		return userMobile;
-	}
-	/**
-	 * @param userMobile the userMobile to set
-	 */
-	public void setUserMobile(String userMobile) {
-		this.userMobile = userMobile;
-	}
-	/**
-	 * @return the roleName
-	 */
-	public String getRoleName() {
-		return roleName;
-	}
-	/**
-	 * @param roleName the roleName to set
-	 */
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+		this.roleId = roleId == null ? null : roleId.trim();
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId == null ? null : userId.trim();
+	}
+
+	public Integer getState() {
+		return state;
+	}
+
+	public void setState(Integer state) {
+		this.state = state;
+	}
+
+	public Date getInsertOn() {
+		return insertOn;
+	}
+
+	public void setInsertOn(Date insertOn) {
+		this.insertOn = insertOn;
+	}
+
+	public String getInsertBy() {
+		return insertBy;
+	}
+
+	public void setInsertBy(String insertBy) {
+		this.insertBy = insertBy == null ? null : insertBy.trim();
+	}
+
+	public Date getUpdateOn() {
+		return updateOn;
+	}
+
+	public void setUpdateOn(Date updateOn) {
+		this.updateOn = updateOn;
+	}
+
+	public String getUpdateBy() {
+		return updateBy;
+	}
+
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy == null ? null : updateBy.trim();
+	}
 }

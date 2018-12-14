@@ -1,108 +1,121 @@
 package com.digital.dance.vo;
 
-public class SystemUserRoleVO extends UserServiceBaseVO {
-	private String userId ; 
-	private String roleId ;
-	private String userName;
-	private String userDisplayName;
-	private String userEmail;
-	private String userCategory;
-	private String userMobile; 
-	private String roleName ;
+import com.digital.dance.bo.UserServiceBaseBO;
+
+import java.io.Serializable;
+import java.util.Date;
+
+public class SystemUserRoleVO extends UserServiceBaseVO implements Serializable {
 	/**
-	 * @return the userId
+	 *
 	 */
-	public String getUserId() {
-		return userId;
+	private static final long serialVersionUID = -7548265387019896426L;
+	private String sysUserRoleId;
+
+	private String sysOrgRoleId;
+
+	private String orgId;
+
+	private String departmentId;
+
+	private String roleId;
+
+	private String userId;
+
+	private Integer state;
+
+	private Date insertOn;
+
+	private String insertBy;
+
+	private Date updateOn;
+
+	private String updateBy;
+
+	public String getSysUserRoleId() {
+		return sysUserRoleId;
 	}
-	/**
-	 * @param userId the userId to set
-	 */
-	public void setUserId(String userId) {
-		this.userId = userId;
+
+	public void setSysUserRoleId(String sysUserRoleId) {
+		this.sysUserRoleId = sysUserRoleId == null ? null : sysUserRoleId.trim();
 	}
-	/**
-	 * @return the roleId
-	 */
+
+	public String getSysOrgRoleId() {
+		return sysOrgRoleId;
+	}
+
+	public void setSysOrgRoleId(String sysOrgRoleId) {
+		this.sysOrgRoleId = sysOrgRoleId == null ? null : sysOrgRoleId.trim();
+	}
+	public String getOrgId() {
+		return orgId;
+	}
+
+	public void setOrgId(String orgId) {
+		this.orgId = orgId == null ? null : orgId.trim();
+	}
+
+	public String getDepartmentId() {
+		return departmentId;
+	}
+
+	public void setDepartmentId(String departmentId) {
+		this.departmentId = departmentId == null ? null : departmentId.trim();
+	}
+
 	public String getRoleId() {
 		return roleId;
 	}
-	/**
-	 * @param roleId the roleId to set
-	 */
+
 	public void setRoleId(String roleId) {
-		this.roleId = roleId;
+		this.roleId = roleId == null ? null : roleId.trim();
 	}
-	/**
-	 * @return the userName
-	 */
-	public String getUserName() {
-		return userName;
+
+	public String getUserId() {
+		return userId;
 	}
-	/**
-	 * @param userName the userName to set
-	 */
-	public void setUserName(String userName) {
-		this.userName = userName;
+
+	public void setUserId(String userId) {
+		this.userId = userId == null ? null : userId.trim();
 	}
-	/**
-	 * @return the userDisplayName
-	 */
-	public String getUserDisplayName() {
-		return userDisplayName;
+
+	public Integer getState() {
+		return state;
 	}
-	/**
-	 * @param userDisplayName the userDisplayName to set
-	 */
-	public void setUserDisplayName(String userDisplayName) {
-		this.userDisplayName = userDisplayName;
+
+	public void setState(Integer state) {
+		this.state = state;
 	}
-	/**
-	 * @return the userEmail
-	 */
-	public String getUserEmail() {
-		return userEmail;
+
+	public Date getInsertOn() {
+		return insertOn;
 	}
-	/**
-	 * @param userEmail the userEmail to set
-	 */
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
+
+	public void setInsertOn(Date insertOn) {
+		this.insertOn = insertOn;
 	}
-	/**
-	 * @return the userCategory
-	 */
-	public String getUserCategory() {
-		return userCategory;
+
+	public String getInsertBy() {
+		return insertBy;
 	}
-	/**
-	 * @param userCategory the userCategory to set
-	 */
-	public void setUserCategory(String userCategory) {
-		this.userCategory = userCategory;
+
+	public void setInsertBy(String insertBy) {
+		this.insertBy = insertBy == null ? null : insertBy.trim();
 	}
-	/**
-	 * @return the userMobile
-	 */
-	public String getUserMobile() {
-		return userMobile;
+
+	public Date getUpdateOn() {
+		return updateOn;
 	}
-	/**
-	 * @param userMobile the userMobile to set
-	 */
-	public void setUserMobile(String userMobile) {
-		this.userMobile = userMobile;
+
+	public void setUpdateOn(Date updateOn) {
+		this.updateOn = updateOn;
 	}
-	/**
-	 * @return the roleName
-	 */
-	public String getRoleName() {
-		return roleName;
+
+	public String getUpdateBy() {
+		return updateBy;
 	}
-	/**
-	 * @param roleName the roleName to set
-	 */
-	public void setRoleName(String roleName) {
-		this.roleName = roleName;
+
+	public void setUpdateBy(String updateBy) {
+		this.updateBy = updateBy == null ? null : updateBy.trim();
 	}
 }

@@ -1,7 +1,7 @@
 package com.digital.dance.vo;
 
 /**
- * 用户美的付信息查询
+ * 用户支付信息查询
  * @author liwy
  *
  * time:2016年8月25日下午9:36:08

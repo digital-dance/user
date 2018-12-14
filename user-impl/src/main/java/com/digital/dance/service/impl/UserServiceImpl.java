@@ -103,6 +103,9 @@ public class UserServiceImpl implements UserService{
 		for(UserEO ite : userEos){
 			UserBO userBo = new UserBO();
 			BeanUtils.copyProperties(ite, userBo);
+
+			userBo.setPageIndex(user.getPageIndex());
+			userBo.setPageSize(user.getPageSize());
 			userBos.add(userBo);
 		}
 		return userBos;
@@ -143,6 +146,9 @@ public class UserServiceImpl implements UserService{
 		for(UserEO item : userEos){
 			UserBO userBo = new UserBO();
 			BeanUtils.copyProperties(item, userBo);
+
+			userBo.setPageIndex(user.getPageIndex());
+			userBo.setPageSize(user.getPageSize());
 			userBos.add(userBo);
 		}
 		return userBos;

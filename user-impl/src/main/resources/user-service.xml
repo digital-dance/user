@@ -12,7 +12,7 @@
         
      <bean id="systemRoleService" class="com.digital.dance.service.impl.SystemRoleServiceImpl" />
      <bean id="systemUserRoleService" class="com.digital.dance.service.impl.SystemUserRoleServiceImpl" />
-     <bean id="userCategoryService" class="com.digital.dance.service.impl.UserCategoryServiceImpl" />
+     <!--<bean id="userCategoryService" class="com.digital.dance.service.impl.UserCategoryServiceImpl" />-->
      <bean id="userService" class="com.digital.dance.service.impl.UserServiceImpl" />
 
     <!--<bean id="ldapUserService" class="com.digital.dance.service.impl.LdapUserServiceImpl">-->
