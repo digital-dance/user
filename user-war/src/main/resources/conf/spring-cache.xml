@@ -42,10 +42,18 @@
     <!-- 替代默认使用cookie,这里使用的是httpheader -->
     <!-- <bean id="httpSessonStrategy" class="org.springframework.session.web.http.HeaderHttpSessionStrategy"/> -->
     <!-- 将session放入redis -->
+    <!--<bean id="defaultCookieSerializer" class="org.springframework.session.web.http.DigitalDefaultCookieSerializer" />-->
+    <!--<bean id="httpSessonStrategy" class="org.springframework.session.web.http.CookieHttpSessionStrategy">-->
+        <!--<property name="cookieSerializer" ref="defaultCookieSerializer" />-->
+    <!--</bean>-->
+    <!--<bean class="org.springframework.session.config.annotation.web.http.SpringHttpSessionConfiguration">-->
+        <!--<property name="cookieSerializer" ref="defaultCookieSerializer" />-->
+    <!--</bean>-->
+
     <bean id="redisHttpSessionConfiguration"
           class="org.springframework.session.data.redis.config.annotation.web.http.RedisHttpSessionConfiguration">
         <property name="maxInactiveIntervalInSeconds" value="1800"/>
-        <!-- <property name="httpSessionStrategy" ref="httpSessonStrategy"/> -->
+        <!--<property name="httpSessionStrategy" ref="httpSessonStrategy"/>-->
     </bean>
 
     <!-- 定时任务相关配置 -->

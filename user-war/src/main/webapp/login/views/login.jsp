@@ -11,7 +11,7 @@
     			type: "get",
     		       
     			url: "../../login/session/id",
-
+                xhrFields:{withCredentials:true},
     			success: function(data){
     		 		document.getElementById("msgBox").innerHTML = JSON.stringify(data);
     		            alert(JSON.stringify(data));
@@ -36,6 +36,7 @@
     			contentType: "application/json; charset=utf-8",
 
     			dataType: "json",
+    			xhrFields:{withCredentials:true},
     			success: function(ret){
     		 		document.getElementById("msgBox").innerHTML = JSON.stringify(ret);
     		            alert(JSON.stringify(ret));
@@ -44,6 +45,39 @@
     		     
     		});
     	}
+
+    	function getHome(){
+            		$.ajax({
+
+            			type: "get",
+
+            			url: "../../index/home",
+                        xhrFields:{withCredentials:true},
+            			success: function(data){
+            		 		document.getElementById("msgBox").innerHTML = JSON.stringify(data);
+            		            alert(JSON.stringify(data));
+
+            			}
+
+            		});
+        }
+
+        function getRemotetoken(){
+        var userEmail = document.getElementById("userEmail").value;
+                    		$.ajax({
+
+                    			type: "get",
+
+                    			url: "http://127.0.0.1:8008/user/login/remotetoken?token="+userEmail,
+                                xhrFields:{withCredentials:true},
+                    			success: function(data){
+                    		 		document.getElementById("msgBox").innerHTML = JSON.stringify(data);
+                    		            alert(JSON.stringify(data));
+
+                    			}
+
+                    		});
+                }
     </script>
         <div class="login-bg">
 <div id="msgBox"></div>
@@ -72,6 +106,10 @@
                         <input v-bind:class="{'disabled': !myform.$valid}" class="btn-default hide " onclick="login()" type="button"  value="登陆"></button>
                         <br>
                         <input v-bind:class="{'disabled': !myform.$valid}" id="sessionId" class="btn-default hide " onclick="getSessionId()" value="会话" type="button"></button>
+                        <br>
+                        <input v-bind:class="{'disabled': !myform.$valid}" id="sessionId" class="btn-default hide " onclick="getHome()" value="home" type="button"></button>
+                        <br>
+                        <input v-bind:class="{'disabled': !myform.$valid}" id="sessionId" class="btn-default hide " onclick="getRemotetoken()" value="Remotetoken" type="button"></button>
                     </div>
                 </form>
             </div>
