@@ -4,19 +4,21 @@ package com.digital.dance.home.login;
 import java.net.URLDecoder;
 import java.net.URLEncoder;
 import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.digital.dance.client.core.shiro.service.impl.PrivilegeCacheManager;
+import com.digital.dance.common.utils.LoggerUtils;
 import com.digital.dance.commons.exception.BizException;
 import com.digital.dance.commons.serialize.json.utils.JSONUtils;
 import com.digital.dance.framework.codis.Codis;
 import com.digital.dance.framework.sso.filter.SSOLoginFilter;
+import com.digital.dance.permission.bo.ResourceBo;
+import com.digital.dance.permission.bo.RoleBranchResourceBo;
+import com.digital.dance.permission.bo.UserPrivilegeBo;
 import com.digital.dance.user.commons.*;
 import com.digital.dance.framework.infrastructure.commons.Constants;
 
@@ -657,13 +659,31 @@ public class LoginController
             throws Exception{
         ResponseVo reVo = new ResponseVo();
         reVo.setResult("");
+
+        LoginInfo loginInfo = null;
+        String pubKey = "";
         try
         {
+
             String token = request.getParameter("token");
-            Integer ret = userService.validatToken(token);
-            if( ret != null && ret < 1 )
+            ResponseVo pubKeyResponseVo = getPubKey( request, response );
+            pubKey = pubKeyResponseVo.getResult().toString();
+            String tokenJson = RSACoderUtil.decryptByPublicKey(pubKey, token);
+
+            loginInfo = (LoginInfo) JSONUtils.toObject(tokenJson, LoginInfo.class);
+
+            if ((loginInfo == null) || (loginInfo.getUserId() == null)) {
+                reVo.setCode(Constants.RETURN_CODE_FAILED);
+            }
+            if((loginInfo.getTokenTimestamp().getTime() + loginInfo.getTokenTimeOut() < new Date().getTime()) && loginInfo.getIsRemember()){
                 reVo.setCode(Constants.RETURN_CODE_SUCCESS);
-            reVo.setResult(ret);
+                reVo.setResult(0);
+            } else {
+                Integer ret = userService.validatToken(token);
+                if (ret != null && ret < 1)
+                    reVo.setCode(Constants.RETURN_CODE_SUCCESS);
+                reVo.setResult(ret);
+            }
         } catch (Exception ex){
             reVo.setResult("exception");
             log.error("/token/validation", ex);
@@ -689,5 +709,53 @@ public class LoginController
             log.error("/token/persistence", ex);
         }
         return reVo;
+    }
+
+
+    /**
+     *http://localhost:8008/user/login/resource?roleId=17&orgId=FB1&departmentId=FB1
+     * @return
+     */
+    @RequestMapping(value="resource", method=RequestMethod.GET)
+    @ResponseBody
+    public ResponseVo listRoleBranchResourceByKey(HttpServletRequest request,
+                                                  HttpServletResponse response, RoleBranchResourceBo loginUserRole){
+        ResponseVo retVo = new ResponseVo();
+        try {
+            List<ResourceBo> resourceBos = PrivilegeCacheManager.listRoleBranchResourceByKey(loginUserRole.getRoleId()
+                    , loginUserRole.getOrgId(), loginUserRole.getDepartmentId());
+            retVo.setResult( resourceBos );
+            retVo.setCode(Constants.ReturnCode.SUCCESS.Code());
+            retVo.setMsg("成功");
+
+        }catch (Exception ex ){
+            retVo.setCode(Constants.ReturnCode.FAILURE.Code());
+            retVo.setMsg("失败，请刷新后再试！");
+            LoggerUtils.fmtError(getClass(), ex, ex.getMessage());
+        }
+        return retVo;
+    }
+
+    /**
+     *http://localhost:8008/user/login/resource/user?userId=1
+     * @return
+     */
+    @RequestMapping(value="resource/user", method=RequestMethod.GET)
+    @ResponseBody
+    public ResponseVo listUserPrivilegeResourceByKey(HttpServletRequest request,
+                                                     HttpServletResponse response, UserPrivilegeBo loginUserRole){
+        ResponseVo retVo = new ResponseVo();
+        try {
+            List<ResourceBo> resourceBos = PrivilegeCacheManager.listUserPrivilegeResourceByKey( loginUserRole.getUserId() );
+            retVo.setResult( resourceBos );
+            retVo.setCode(Constants.ReturnCode.SUCCESS.Code());
+            retVo.setMsg("成功");
+
+        }catch (Exception ex ){
+            retVo.setCode(Constants.ReturnCode.FAILURE.Code());
+            retVo.setMsg("失败，请刷新后再试！");
+            LoggerUtils.fmtError(getClass(), ex, ex.getMessage());
+        }
+        return retVo;
     }
 }

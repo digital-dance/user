@@ -106,7 +106,7 @@
 		<url-pattern>/*</url-pattern>
 	</filter-mapping>
 	
-	<!-- sso Filter配置 -->
+	<!-- 认证控制 sso Filter配置 -->
 
  	 <filter>
 		<filter-name>loginFilter</filter-name>
@@ -114,7 +114,7 @@
  		 
 		<init-param>
 			<param-name>cas_web_site_name</param-name>
-			<param-value>serverroom_user</param-value>
+			<param-value>user</param-value>
 		</init-param>
 		
 		<init-param>
@@ -127,7 +127,7 @@
 		</init-param>
 		<init-param>
 			<param-name>bizloginUrl</param-name>
-			<param-value>http://16.187.145.23/userservice/index/home</param-value>
+			<param-value>http://127.0.0.1:8008/user/index/home</param-value>
 		</init-param>
 		<init-param>
 			<param-name>readonlyUrl</param-name>
@@ -135,7 +135,7 @@
 		</init-param>
 		<init-param>
 			<param-name>homePageUrl</param-name>
-			<param-value>http://16.173.234.23/#/home</param-value>
+			<param-value>http://127.0.0.1:8008/#/home</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
@@ -144,18 +144,41 @@
 	</filter-mapping>
 <!--
 	<servlet>
-		<servlet-name>MideaSSOLoginServlet</servlet-name>
-		<servlet-class>com.midea.framework.e4a.sso.web.servlet.MideaSSOLoginServlet</servlet-class>
+		<servlet-name>loginFilter</servlet-name>
+		<servlet-class>com.digital.dance.framework.sso.filter.SSOLoginFilter</servlet-class>
 		 初始化业务系统token验证URL，内容取决于验证servlet的mapping配置 
 		<init-param>
 			<param-name>bizloginUrl</param-name>
-			<param-value>http://efssit.midea.com/home_sso/token.html</param-value>
+			<param-value>http://127.0.0.1:8008/user/index/home</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
-		<servlet-name>MideaSSOLoginServlet</servlet-name>
+		<servlet-name>loginFilter</servlet-name>
 		 映射路径可以自定义，但需要与拦截器的[bizloginUrl]初始化参数保持一致 
-		<url-pattern>/home_sso/token.html</url-pattern>
+		<url-pattern>/index/home</url-pattern>
 	</servlet-mapping> 
 	-->
+    <!-- 权限控制 -->
+	<filter>
+		<filter-name>PermissionFilter</filter-name>
+		<filter-class>com.digital.dance.client.core.shiro.filter.PermissionFilter</filter-class>
+
+		<init-param>
+			<param-name>allowUrl</param-name>
+			<param-value>http://127.0.0.1:8008/#/home;http://127.0.0.1:8008/user/login/views/login.jsp;/index/home;/login/user;login/views/default;/login/pubKey;/login/token/validation;/login/token/persistence;/login/</param-value>
+		</init-param>
+		<init-param>
+			<param-name>allowSuffix</param-name>
+			<param-value>css;js;jpg;png</param-value>
+		</init-param>
+
+		<init-param>
+			<param-name>readonlyUrl</param-name>
+			<param-value>/index/home;/login/user;login/views/default</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>PermissionFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
 </web-app>

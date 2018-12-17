@@ -26,6 +26,8 @@ public class UserVO extends UserServiceBaseVO implements Serializable {
 
 	private Boolean rolePrivilegeInd;
 
+	private Boolean isRemember;
+
 	private Integer state;
 
 	private Date insertOn;
@@ -35,6 +37,14 @@ public class UserVO extends UserServiceBaseVO implements Serializable {
 	private Date updateOn;
 
 	private String updateBy;
+
+	public Boolean getIsRemember() {
+		return this.isRemember;
+	}
+
+	public void setIsRemember(Boolean isRemember) {
+		this.isRemember = isRemember;
+	}
 
 	public String getUserId() {
 		return userId;
@@ -159,24 +169,7 @@ public class UserVO extends UserServiceBaseVO implements Serializable {
 	}
 
 	private List<SystemUserRoleVO> roles ;
-
-	private String isRemember;
-	/**
-	 *
-	 * @return
-	 */
-	public String getIsRemember() {
-		return isRemember;
-	}
-
-	/**
-	 *
-	 * @param isRemember
-	 */
-	public void setIsRemember(String isRemember) {
-		this.isRemember = isRemember;
-	}
-
+	
 	/**
 	 * @return the roles
 	 */

@@ -26,6 +26,8 @@ public class UserEO extends UserServiceBaseEO implements Serializable {
 
 	private Integer state;
 
+	private Boolean isRemember;
+
 	private Date insertOn;
 
 	private String insertBy;
@@ -33,6 +35,14 @@ public class UserEO extends UserServiceBaseEO implements Serializable {
 	private Date updateOn;
 
 	private String updateBy;
+
+	public Boolean getIsRemember() {
+		return this.isRemember;
+	}
+
+	public void setIsRemember(Boolean isRemember) {
+		this.isRemember = isRemember;
+	}
 
 	public String getUserId() {
 		return userId;

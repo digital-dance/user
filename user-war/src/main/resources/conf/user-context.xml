@@ -70,5 +70,8 @@
 	<import resource="classpath:/conf/user-dubbo.xml"/>
 	<import resource="classpath:/conf/framework-sso-client.xml" />
 	<import resource="classpath:/conf/spring-mq.xml" />
+
+	<import resource="classpath*:/spring-cache_permission.xml"/>
+	<import resource="classpath*:/spring-shiro_permission.xml"/>
 	<context:component-scan base-package="org.springframework.web.filter.DelegatingFilterProxy"></context:component-scan>
 </beans>

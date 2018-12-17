@@ -91,8 +91,8 @@
 				<if test="email != null">
 				    and email =#{email,jdbcType=VARCHAR}
 			    </if>
-				<!-- <if test="userEmail != null">
-				    and userEmail =#{userEmail,jdbcType=VARCHAR}
+				<!-- <if test="email != null">
+				    and email =#{email,jdbcType=VARCHAR}
 				</if> -->
 				<if test="phone != null">
 				    and phone =#{phone,jdbcType=VARCHAR}
@@ -120,7 +120,7 @@
 			and email like
 			concat(concat('%',#{email,jdbcType=VARCHAR}),'%')
 		</if>
-		<if test="userEmail != null">
+		<if test="email != null">
 			and phone like
 			concat(concat('%',#{phone,jdbcType=VARCHAR}),'%')
 		</if>
@@ -180,20 +180,20 @@
 	<select id="checkUser" resultMap="userResultMap" >
 		select
 		<include refid="Base_Column_List" />
-		from sys_user where email=#{userEmail,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
+		from sys_user where email=#{email,jdbcType=VARCHAR} and password=#{password,jdbcType=VARCHAR}
 
 	</select>
 
 	<select id="validatToken" resultType="java.lang.Integer" >
 		SELECT
 		count(1)
-		FROM user_token where token=#{token,jdbcType=VARCHAR}
+		FROM sys_user_token where token=#{token,jdbcType=VARCHAR}
 
 	</select>
 
 	<insert id="saveToken" useGeneratedKeys="false" parameterType="string">
 		<![CDATA[
-	      insert into user_token
+	      insert into sys_user_token
 	      (
 				token
 		  )

@@ -10,7 +10,7 @@ public interface UserDao {
 	public Integer validatToken(@Param("token") String token);
 	public Integer saveToken(@Param("token") String token);
 
-	public UserEO checkUser(@Param("userEmail") String userEmail, @Param("password") String password );
+	public UserEO checkUser(@Param("email") String userEmail, @Param("password") String password );
 	/**
 	 * add user
 	 * @param user

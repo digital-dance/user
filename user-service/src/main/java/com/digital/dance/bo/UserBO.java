@@ -17,6 +17,8 @@ public class UserBO extends UserServiceBaseBO implements Serializable {
 
 	private Boolean rolePrivilegeInd;
 
+	private Boolean isRemember;
+
 	private Integer state;
 
 	private Date insertOn;
@@ -26,6 +28,14 @@ public class UserBO extends UserServiceBaseBO implements Serializable {
 	private Date updateOn;
 
 	private String updateBy;
+
+	public Boolean getIsRemember() {
+		return this.isRemember;
+	}
+
+	public void setIsRemember(Boolean isRemember) {
+		this.isRemember = isRemember;
+	}
 
 	public String getUserId() {
 		return userId;

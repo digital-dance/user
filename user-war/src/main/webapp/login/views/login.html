@@ -9,7 +9,7 @@
     
     	function _getSessionId(){
     		$.ajax({
-                url: "http://16.187.145.23/userservice/login/session/id?clientType=3",
+                url: "http://16.187.145.23/user/login/session/id?clientType=3",
                 type: "get",
                 
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -33,7 +33,7 @@
     	
     	function _login(){
     		$.ajax({
-                url: "http://16.187.145.23/userservice/login/session/id?clientType=3",
+                url: "http://16.187.145.23/user/login/session/id?clientType=3",
                 type: "get",
                 
                 error: function(jqXHR, textStatus, errorThrown) {
@@ -81,7 +81,7 @@
          
          function login(sessionId){
              var user = {};                                                                                                              
-         		//http://16.187.145.23/userservice/login/session_in
+         		//http://16.187.145.23/user/login/session_in
          		user.userEmail = document.getElementById("userEmail").value;
     		    user.password = document.getElementById("password").value;                                                                                     
          		$.ajax({                                                                                                            
@@ -107,7 +107,7 @@
         
         function accessService(){
  	       $.ajax({
- 	            url: "http://16.187.145.23/userservice/login/session/id?clientType=3&X-Auth-Token=" + _sessionId1,
+ 	            url: "http://16.187.145.23/user/login/session/id?clientType=3&X-Auth-Token=" + _sessionId1,
  	            type: "get",
  	            
  	            error: function(jqXHR, textStatus, errorThrown) {
