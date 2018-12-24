@@ -23,9 +23,10 @@
     	
     	function login(){
     		var user = {};
-    		//http://16.187.145.23/userservice/login/session_in
-    		user.userEmail = document.getElementById("userEmail").value;
+    		//http://16.187.145.23/user/login/session_in
+    		user.email = document.getElementById("userEmail").value;
     		user.password = document.getElementById("password").value;
+    		user.isRemember = true;
     		$.ajax({
 
     			type: "post",

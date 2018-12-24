@@ -15,6 +15,7 @@ import com.digital.dance.framework.sso.filter.SSOLoginFilter;
 import com.digital.dance.framework.sso.util.SSOLoginManageHelper;
 import com.digital.dance.framework.infrastructure.commons.Constants;
 import com.digital.dance.framework.infrastructure.commons.GsonUtils;
+import com.digital.dance.user.commons.BeanUtils;
 import com.digital.dance.user.commons.Log;
 import com.digital.dance.user.commons.ResponseVo;
 
@@ -63,7 +64,12 @@ public class IndexController {
 		String ret = ssologinManageHelper.getApiLoginUrl();
 		if( loginInfo != null && !StringTools.isEmpty(callBackUrl)){
 //			callBackUrl = URLDecoder.decode(callBackUrl, "UTF-8");
-			String token = JSONUtils.toJson(loginInfo);
+
+			LoginInfo tokenLoginInfo = new LoginInfo();
+			BeanUtils.copyProperties( loginInfo, tokenLoginInfo );
+
+			tokenLoginInfo.setUserRoles(null);
+			String token = JSONUtils.toJson(tokenLoginInfo);
 			token = RSACoderUtil.encryptByPrivateKey(casPrivateKey, token);
 			token = URLEncoder.encode( token, "UTF-8" );
 			ret = callBackUrl.split("\\?")[0] + "?token=" + token;

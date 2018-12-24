@@ -3,7 +3,8 @@
 http://localhost:8080/user-war/user/register?userId=3q4343ssdsd1&userName=asdfsdf
 
 http://localhost:8080/user-war/user/userName?userName=asdfsdf
-http://localhost:8080/user-war/user/userId?userId=34343ssdsd1
+http://localhost:8008/user/user/userId?userId=34343ssdsd1
+http://localhost:8008/user/user/userName?userName=3
 http://localhost:8080/user-war/user/allusers?userName=asdfsdf
 
 http://localhost:8080/user-war/user/paged/users?userId=34343ssdsd1&userName=asdfsdf&pageSize=1&pageIndex=1

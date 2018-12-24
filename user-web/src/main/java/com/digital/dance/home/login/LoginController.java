@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.digital.dance.client.core.shiro.cache.VCache;
 import com.digital.dance.client.core.shiro.service.impl.PrivilegeCacheManager;
 import com.digital.dance.common.utils.LoggerUtils;
 import com.digital.dance.commons.exception.BizException;
@@ -142,6 +143,7 @@ public class LoginController
 
             if(userService != null){
                 userBO  = userService.checkUser(userEmail, md5Psw);
+                userBO.setIsRemember( userVo.getIsRemember() );
 
                 //fake begin
                 //UserBO userBO = new UserBO();// userService.findUserByUserName(userName);
@@ -174,6 +176,7 @@ public class LoginController
                     BeanUtils.copyProperties(r, lur);
                     loginUserRoles.add(lur);
                 }
+
                 user.setRoles(rolevos);
 
                 HttpSession session = request.getSession();
@@ -187,8 +190,14 @@ public class LoginController
                 BeanUtils.copyProperties(userBO, loginInfo);
                 loginInfo.setJsessionidCAS(session.getId());
 
+                loginInfo.setUserRoles(loginUserRoles);
+
                 LoginContext.setLoginInfo(loginInfo);
                 SSOLoginFilter.setLoginInfo2Session(request, loginInfo);
+
+                String key = PrivilegeCacheManager.getUserRolesKey( userBO.getUserId() );
+                VCache.delByKey( VCache.buildKey( key ) );
+                VCache.setVByListMutiElements( key, loginUserRoles );
 
                 String browserContext = "";
                 try {//记录浏览器参数
@@ -200,22 +209,27 @@ public class LoginController
                     e.printStackTrace();
                     log.error(e.getMessage(), e);
                 }
-                //loginInfo.setSessionId(session.getId());
-                loginInfo.setUserRoles(loginUserRoles);
-                String tokenJson = JSONUtils.toJson(loginInfo);
+
+                LoginInfo tokenLoginInfo = new LoginInfo();
+                BeanUtils.copyProperties( loginInfo, tokenLoginInfo );
+
+                tokenLoginInfo.setUserRoles(null);
+
+                String tokenJson = JSONUtils.toJson( tokenLoginInfo );
                 String casPrivateKey = (String)RSACoderUtil.getKey().get(RSACoderUtil.private_Key);
 
-                String token = RSACoderUtil.encryptByPrivateKey(casPrivateKey, tokenJson);
+                String token = RSACoderUtil.encryptByPrivateKey( casPrivateKey, tokenJson );
 
-                String callBackUrl = request.getSession().getAttribute(SSOLoginManageHelper.BIZ_URL).toString();
+                Object callBackUrlObj = request.getSession().getAttribute(SSOLoginManageHelper.BIZ_URL);
+                String callBackUrl = callBackUrlObj != null ? callBackUrlObj.toString() : "";
                 if( !StringTools.isEmpty(callBackUrl)){
 //                    callBackUrl = URLDecoder.decode(callBackUrl, "UTF-8");
                     String encodedToken = URLEncoder.encode( token, "UTF-8" );
                     String ret = callBackUrl.split("\\?")[0] + "?token=" + encodedToken;
-                    user.setRedirect(ret);
+                    user.setRedirect( ret );
 
                     if( !( ClientTypeEnums.WEBAJAX.getClientType().equals(clientType) ) ){
-                        response.sendRedirect(ret);
+                        response.sendRedirect( ret );
                     }
                 }
 
@@ -223,11 +237,7 @@ public class LoginController
                 reVo.setCode(Constants.RETURN_CODE_SUCCESS);
                 reVo.setMsg(Constants.SUCCESS_MSG);
             }
-//            else {
-//            	reVo.setCode(Constants.RETURN_CODE_FAILED);
-//                reVo.setMsg("failed");
-//                reVo.setResult(null);
-//            }
+
         }
         catch (Exception e)
         {
@@ -675,7 +685,8 @@ public class LoginController
             if ((loginInfo == null) || (loginInfo.getUserId() == null)) {
                 reVo.setCode(Constants.RETURN_CODE_FAILED);
             }
-            if((loginInfo.getTokenTimestamp().getTime() + loginInfo.getTokenTimeOut() < new Date().getTime()) && loginInfo.getIsRemember()){
+            Boolean isRemember = loginInfo.getIsRemember() == null ? false : loginInfo.getIsRemember();
+            if((loginInfo.getTokenTimestamp().getTime() + loginInfo.getTokenTimeOut() < new Date().getTime()) && isRemember ){
                 reVo.setCode(Constants.RETURN_CODE_SUCCESS);
                 reVo.setResult(0);
             } else {

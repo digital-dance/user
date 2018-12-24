@@ -16,6 +16,26 @@ public class SystemRoleBO  extends UserServiceBaseBO implements Serializable {
 
 	private String roleId;
 
+	public String getDepartmentPath() {
+		return departmentPath;
+	}
+
+	public void setDepartmentPath(String departmentPath) {
+		this.departmentPath = departmentPath;
+	}
+
+	private String departmentPath;
+
+	public String getRolePath() {
+		return rolePath;
+	}
+
+	public void setRolePath(String rolePath) {
+		this.rolePath = rolePath;
+	}
+
+	private String rolePath;
+
 	private String roleCode;
 
 	private String roleName;

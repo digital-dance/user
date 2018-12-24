@@ -16,6 +16,26 @@ public class SystemUserRoleEO extends UserServiceBaseEO implements Serializable 
 
 	private String departmentId;
 
+	public String getDepartmentPath() {
+		return departmentPath;
+	}
+
+	public void setDepartmentPath(String departmentPath) {
+		this.departmentPath = departmentPath;
+	}
+
+	private String departmentPath;
+
+	public String getRolePath() {
+		return rolePath;
+	}
+
+	public void setRolePath(String rolePath) {
+		this.rolePath = rolePath;
+	}
+
+	private String rolePath;
+
 	private String roleId;
 
 	private String userId;
