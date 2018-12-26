@@ -177,7 +177,7 @@ public class LoginController
                     loginUserRoles.add(lur);
                 }
 
-                user.setRoles(rolevos);
+//              user.setRoles(rolevos);
 
                 HttpSession session = request.getSession();
                 if(session != null){
@@ -221,11 +221,12 @@ public class LoginController
                 String token = RSACoderUtil.encryptByPrivateKey( casPrivateKey, tokenJson );
 
                 Object callBackUrlObj = request.getSession().getAttribute(SSOLoginManageHelper.BIZ_URL);
+                Object queryStringObj = request.getSession().getAttribute(SSOLoginManageHelper.WEB_QUERY_STRING);
                 String callBackUrl = callBackUrlObj != null ? callBackUrlObj.toString() : "";
                 if( !StringTools.isEmpty(callBackUrl)){
 //                    callBackUrl = URLDecoder.decode(callBackUrl, "UTF-8");
                     String encodedToken = URLEncoder.encode( token, "UTF-8" );
-                    String ret = callBackUrl.split("\\?")[0] + "?token=" + encodedToken;
+                    String ret = callBackUrl.split("\\?")[0] + "?token=" + encodedToken + "&" + queryStringObj;
                     user.setRedirect( ret );
 
                     if( !( ClientTypeEnums.WEBAJAX.getClientType().equals(clientType) ) ){

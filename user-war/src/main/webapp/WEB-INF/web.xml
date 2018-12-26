@@ -119,7 +119,7 @@
 		
 		<init-param>
 			<param-name>allowUrl</param-name>
-			<param-value>http://127.0.0.1:8008/#/home;http://127.0.0.1:8008/user/login/views/login.jsp;/index/home;/login/user;login/views/default;/login/pubKey;/login/token/validation;/login/token/persistence;/login/</param-value>
+			<param-value>http://192.168.1.78:8008/#/home;http://192.168.1.78:8008/user/login/views/login.jsp;/index/home;/login/user;login/views/default;/login/pubKey;/login/token/validation;/login/token/persistence;/login.html;/login/</param-value>
 		</init-param>
 		<init-param>
 			<param-name>allowSuffix</param-name>
@@ -127,7 +127,7 @@
 		</init-param>
 		<init-param>
 			<param-name>bizloginUrl</param-name>
-			<param-value>http://127.0.0.1:8008/user/index/home</param-value>
+			<param-value>http://192.168.1.78:8008/user/index/home</param-value>
 		</init-param>
 		<init-param>
 			<param-name>readonlyUrl</param-name>
@@ -135,7 +135,7 @@
 		</init-param>
 		<init-param>
 			<param-name>homePageUrl</param-name>
-			<param-value>http://127.0.0.1:8008/#/home</param-value>
+			<param-value>http://192.168.1.78:8008/#/home</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
@@ -149,7 +149,7 @@
 		 初始化业务系统token验证URL，内容取决于验证servlet的mapping配置 
 		<init-param>
 			<param-name>bizloginUrl</param-name>
-			<param-value>http://127.0.0.1:8008/user/index/home</param-value>
+			<param-value>http://192.168.1.78:8008/user/index/home</param-value>
 		</init-param>
 	</servlet>
 	<servlet-mapping>
@@ -165,7 +165,7 @@
 
 		<init-param>
 			<param-name>allowUrl</param-name>
-			<param-value>http://127.0.0.1:8008/#/home;http://127.0.0.1:8008/user/login/views/login.jsp;/index/home;/login/user;login/views/default;/login/pubKey;/login/token/validation;/login/token/persistence;/login/</param-value>
+			<param-value>http://192.168.1.78:8008/#/home;http://192.168.1.78:8008/user/login/views/login.jsp;/index/home;/login/user;login/views/default;/login/pubKey;/login/token/validation;/login/token/persistence;/login.html;/login/</param-value>
 		</init-param>
 		<init-param>
 			<param-name>allowSuffix</param-name>

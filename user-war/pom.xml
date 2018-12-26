@@ -14,7 +14,7 @@
 		<dependency>
 			<groupId>com.digital.dance.framework</groupId>
 			<artifactId>framework.sso</artifactId>
-		  	<classifier>pg</classifier>
+		  	<!--<classifier>pg</classifier>-->
 			<version>0.0.1-SNAPSHOT</version>
 		</dependency>
 		<dependency>

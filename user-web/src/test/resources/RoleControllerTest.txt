@@ -15,7 +15,7 @@ $.ajax({
 	type: "PUT",
 
        
-	url: "http://127.0.0.1:8080/user-war/role/vos",
+	url: "http://192.168.1.78:8080/user-war/role/vos",
 
        
 	data: JSON.stringify([{"roleName":"34343ssdsd1","roleId":"asdfsdf0","roleDescription":"asdfsdf1"},{"roleName":"3q4343ssdsd1","roleId":"asdfsdf1","roleDescription":"asdfsdf1"}]),
@@ -44,7 +44,7 @@ $.ajax({
 	type: "delete",
 
        
-	url: "http://127.0.0.1:8080/user-war/role/vos",
+	url: "http://192.168.1.78:8080/user-war/role/vos",
 
        
 	data: JSON.stringify([{"roleName:"34343ssdsd1","roleId":"asdfsdf0"},{"roleName":"3q4343ssdsd1","roleId":"asdfsdf1"}]),

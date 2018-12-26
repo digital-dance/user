@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>数字脉动</title>
+    <!-- css3-mediaqueries.js for IE8 or older -->
+    <!--[if lt IE 9]>
+        <script src="css/css3-mediaqueries.js"></script>
+    <![endif]--><link type="text/css" rel="stylesheet" href="css/style.css" />
+    <link rel="stylesheet" href="css/menustyle.css" type="text/css" media="screen"/>
+    
+    <script type="text/javascript" src="script/jquery.min.js"></script>
+    <script src="script/question.js" type="text/javascript"></script>
+    <!-- 如果想要旋转效果，请引用下面的两个js文件-->
+    <script src="script/jquery-css-transform.js" type="text/javascript"></script>
+    <script src="script/jquery-animate-css-rotate-scale.js" type="text/javascript"></script>
+</head>
+<body>
+
+    <div id="pagewrap">
+        <div id="header">
+            <div id="title">联系我们</div>
+        </div>
+        <!--<div id="content" style="display:block;width:100%;height:100%;overflow-x:hidden;overflow-y:hidden;">-->
+            <!--<div class="newsContent" id="divAbout">
+                “美亚保险的价值已经体现在很多方面，比如在产品创新上，美亚做了很多的努力，尤其是在特殊市场
+上。”房晓晓告诉记者，中国的保险市场有这样一个特点：在传统业务上，产品、承保技术以及承保能力等并不
+匮乏，与其在饱和的传统市场上竞争，美亚更愿意在特殊领域上去开拓市场。
+据了解，美亚保险近几年根据不同行业中小企业客户的不同需求及预算情况，不断推出既贴近客户需求，保
+费又合理的工商企业综合保障计划，提供便利的“多种保障，一站式投保”的全方位保险服务。
+“美亚为中小企业推出的‘一揽子保障计划’非常受业界欢迎，每年发展也非常健康。”房晓晓表示，美亚
+近年也关注第三者责任险的风险及市场需求，尤其是工程建设和能源高风险企业的第三者责任险需求明显。因此
+美亚今年为满足市场需求，将力推第三者责任险。今年11 月份青岛石化管道爆炸事故的发生，更加凸现了此类项
+目中潜在的风险及市场需求。
+            </div>-->
+
+        <!--<div class="clr"></div>-->
+        <!-- 联系美亚 -->
+            <div class="layer11" id="contactLayer" style="display:block;width:100%;height:100%;overflow-x:hidden;overflow-y:hidden;">
+                    <!--<div class="regRight">
+                        <div class="current" style="background-color: #3CB5FC;">联系我们</div>
+                        <div class="ico">
+                            <a href="javascript:void(0);" id="closeContactLayer" class="closeReg">
+                                <img src="images/leftIcon2.png" alt="关闭" /></a>
+                        </div>
+                    </div>-->
+                    <div class="regContent" style="display:block;width:100%;height:100%;overflow-x:hidden;overflow-y:hidden;">
+                            <span class="title1">我要提问</span>
+                            <div style="border-bottom:1px solid #C2C2C2; padding-bottom:10px;">请填写您的问题并提交，我们的客服人员将尽快通过电话或邮箱联系您，为您答疑解难！</div>
+                      <br>
+                      <table >
+                        <tr class="contactDIV">
+                            <td align="right">
+                        <!--<div class="contactDIV">-->
+                                <div style=" display:inline;color:#F00; font-weight:bold;">*</div>&nbsp;姓名&nbsp;</td>
+                             <td align="left">
+                                <input type="text" id="txtName" class="input" value='真实姓名'/><b id="txtNameTips" class="tips"></b>
+                        <!--</div>-->
+                            </td></tr>
+                        <tr class="contactDIV">
+                            <td align="right">
+                        <!--<div class="contactDIV">-->
+                                性别&nbsp;
+                             </td>
+                             <td align="left"><select id='selectedGender' class="user">
+                                    <option>-- 请选择 --</option>
+                                    <option>男</option>
+                                    <option>女</option>
+                                </select>
+                            <!--<div id="passTips" class="tips"></div>-->
+                        <!--</div>-->
+                            </td></tr>
+                        <tr class="contactDIV">
+                            <td align="right">
+                        <!--<div class="contactDIV">-->
+                                <div style=" display:inline;color:#F00; font-weight:bold;">*</div>&nbsp;联系方式&nbsp;</td><td align="left"><input type="text" id="txtMobile" class="input" value='邮箱/手机号码' /><b id="txtMobileTips" class="tips"></b>
+                        <!--</div>-->
+                            </td></tr>
+                        <!--<div class="contactDIV">
+                        <div style=" display:inline;color:#F00; font-weight:bold;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;* </div>
+                        邮箱&nbsp;&nbsp;&nbsp;&nbsp;<input type="text" id="txtEmail" class="input" />
+                            <div id="authcodeTips" class="tips"></div>
+                        </div>-->
+                        <!--<div class="clr"></div>-->
+                        <!--<div><span style="display:inline; color:#F00; font-weight:bold;">*</span> 为必填项，请填写手机号码或邮箱，以便于我们联系您</div>-->
+                        <tr class="contactDIV"><td></td><td align="left">
+                        <!--<div class="contactDIV">-->
+                            <textarea id="txtContents" style="width: 90%; height: 80px;" maxlength="200" placeholder="我要留言" class="textareaInput"></textarea>
+                        <!--</div>-->
+                        </td></tr>
+                        <tr><td></td><td  align="center">
+                        <!--<div style="text-align: center; padding-top: 10px;  padding-bottom: 10px; width: 100%;">--><a href="javascript:;" style="margin:0px auto;" id="btnContactSubmit" class="buttonBlue">提交</a><!--<input name="提交" type="submit" class="buttonBlue" id="btnContactSubmit" value="提交" />-->
+                        <!--</div>-->
+                        </td></tr>
+                        </table>
+                    </div>
+                    <div class="regBottom">&nbsp;</div>
+            </div>
+
+        <!--</div>-->
+
+        <!--<div id="footer">
+            <ul>
+                <li><a href="#">隐私政策</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+                <li><a href="#">使用条款</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+                <li><a id="contactLink" href="#">联系我们</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>-->
+                <!--<li><a href="login.html">登录</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>
+                <li><a href="register.html">注册</a>&nbsp;&nbsp;|&nbsp;&nbsp;</li>-->
+                <!--<li>Copyright &copy; 沪ICP备09040636号 美亚财产保险有限公司 版权所有</li>
+            </ul>
+            <div class="clr"></div>
+        </div>-->
+        <!--<div id="footerIndex">
+                <table border="0" cellspacing="0" cellpadding="0">
+                <tr>
+                  <td><a href="/terms/privacy-statement_2092_378542.html" target="_blank" style=" color:Black">隐私政策&nbsp;&nbsp;|&nbsp;&nbsp;</a><a href="/terms/terms-of-use_2092_378541.html" target="_blank" style=" color:Black">使用条款&nbsp;&nbsp;|&nbsp;&nbsp;</a><a id="contactLink" href="#" style="color:Black">联系我们</a></td>
+                </tr>
+                <tr>
+                  <td class="copyRight" style=" color:Black">Copyright &copy; 沪ICP备09040636号 美亚财产保险有限公司 版权所有</td>
+                </tr>
+              </table>
+         </div>-->
+    </div>
+
+  
+  <div class="clr"></div>
+  <div class="suspend">
+        <div class="menu">
+            <div class="item">
+                <span id='menuLinkSpan' class="menuLink icon_home"></span>
+                    <a id="icon_left" href="javascript:document.getElementById('icon_left').style.display='none';document.getElementById('icon_right').style.display='block';document.getElementById('item_content').style.left='80px';document.getElementById('itemPosition').style.left='0px';void(0);"></a>
+                <div id="item_content">
+                    <div id="itemPosition">
+                        <a class="menuLink icon_1" href="index.html"></a>
+                        <a class="menuLink icon_2" href="User.aspx"></a>
+                        <a class="menuLink icon_3" href="activity.html"></a>
+                        <a class="menuLink icon_4" href="security.html"></a>
+                        <a class="menuLink icon_5" href="news.html"></a>
+                        <a class="menuLink icon_6" href="about.html" style="margin-right:0px;"></a>
+                    </div>
+                </div>
+                    <a id="icon_right" href="javascript:document.getElementById('icon_left').style.display='block';document.getElementById('icon_right').style.display='none';document.getElementById('item_content').style.left='90px';document.getElementById('itemPosition').style.left='-180px';void(0);" style="margin-right:0px;"></a>
+            </div>
+        </div>
+        <script type="text/javascript" src="script/menu.js"></script>
+  </div>
+    <script language='javascript' type="text/javascript">
+
+        $(window).resize(function () {
+            resetFont();
+        });
+        function resetFont() {
+            //alert($('html,body').css('width'));            
+            var newBodyWidth = parseFloat($('html,body').css('width').toString().replace('px', '')) / 400;
+            $('#contactTitle').css('font-size', (12 * newBodyWidth) + 'px');
+            $('.regContent span').each(function () {
+                var newFontSize = 13 * newBodyWidth;
+                newFontSize = (newFontSize > 13) ? 13 : newFontSize;
+                $(this).css('font-size', newFontSize + 'px');
+                //$(this).css('height', '40px');
+            });
+            $('.regContent b').each(function () {
+                var newFontSize = 10 * newBodyWidth;
+                newFontSize = (newFontSize > 13) ? 13 : newFontSize;
+                $(this).css('font-size', newFontSize + 'px');
+
+            });
+            $('.regContent div').each(function () {
+                var newFontSize = 10 * newBodyWidth;
+                newFontSize = (newFontSize > 13) ? 13 : newFontSize;
+                $(this).css('font-size', newFontSize + 'px');
+
+            });
+            $('.contactDIV input').each(function () {
+                var newHeight = 20 * newBodyWidth;
+                newHeight = (newHeight > 20) ? 20 : newHeight;
+                $(this).css('height', newHeight + 'px');
+                var newFontSize = 13 * newBodyWidth;
+                newFontSize = (newFontSize > 13) ? 13 : newFontSize;
+                $(this).css('font-size', newFontSize + 'px');
+                if ($(this).attr('type') != "radio") {
+                    var newWidth = 120 * newBodyWidth;
+                    $(this).css('width', newWidth + 'px');
+                }
+
+            });
+            $('.contactDIV select').each(function () {
+                var newHeight = 22 * newBodyWidth;
+                newHeight = (newHeight > 22) ? 22 : newHeight;
+                $(this).css('height', newHeight + 'px');
+                var newFontSize = 13 * newBodyWidth;
+                newFontSize = (newFontSize > 13) ? 13 : newFontSize;
+                $(this).css('font-size', newFontSize + 'px');
+                if ($(this).attr('type') != "radio") {
+                    var newWidth = 120 * newBodyWidth;
+                    $(this).css('width', newWidth + 'px');
+                }
+
+            });
+            $('.regContent textarea').each(function () {
+                var newHeight = 54 * newBodyWidth;
+                newHeight = (newHeight > 54) ? 54 : newHeight;
+                //$(this).css('height', newHeight + 'px');
+                var newFontSize = 13 * newBodyWidth;
+                newFontSize = (newFontSize > 13) ? 13 : newFontSize;
+                $(this).css('font-size', newFontSize + 'px');
+                var newWidth = 260 * newBodyWidth;
+                $(this).css('width', newWidth + 'px');
+
+            });
+            $(':button').each(function () {
+                var newHeight = 20 * newBodyWidth;
+                newHeight = (newHeight > 20) ? 20 : newHeight;
+                $(this).css('height', newHeight + 'px');
+
+                var newFontSize = 13 * newBodyWidth;
+                newFontSize = (newFontSize > 13) ? 13 : newFontSize;
+                $(this).css('font-size', newFontSize + 'px');
+
+            });
+
+        }
+        resetFont();
+    </script>
+</body>
+</html>

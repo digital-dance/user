@@ -55,7 +55,11 @@ public class IndexController {
 	public String index(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		log.info("进入首页页面");
 		String callBackUrl = request.getParameter(SSOLoginManageHelper.BIZ_URL);
+		String queryString = request.getParameter(SSOLoginManageHelper.WEB_QUERY_STRING);
+
 		request.getSession().setAttribute(SSOLoginManageHelper.BIZ_URL, callBackUrl);
+		request.getSession().setAttribute(SSOLoginManageHelper.WEB_QUERY_STRING, queryString);
+
 		LoginInfo loginInfo = SSOLoginFilter.getLoginInfoFromSession(request);
 
 		//String casPubKey = (String)RSACoderUtil.getKey().get(RSACoderUtil.public_Key);
