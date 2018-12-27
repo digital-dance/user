@@ -68,15 +68,15 @@ $(document).ready(function () {//alert(0);
 						alert(escape(password));
             $.ajax({
 						type: "POST",
-						url: "http://192.168.1.78:8008/user/login/user",
+						url: "http://192.168.28.255:8008/user/login/user",
 						data: JSON.stringify({﻿"email":escape(username),﻿"password":escape(password),"isRemember": remember}),
 						contentType: "application/json; charset=utf-8",
 						dataType: "json",
 						success:function (data, status) {
 
 							var datas = data.result;
-							alert(data.code);
-							alert(status);
+//							﻿alert(data.code);
+//                          alert( (data.result.redirect) );
 
 							switch (data.code) {
 									case "10000":

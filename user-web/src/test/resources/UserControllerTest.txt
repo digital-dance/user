@@ -14,7 +14,7 @@ $.ajax({
 	type: "get",
 
        
-	url: "http://192.168.1.78:8080/user-war/login/session/id",
+	url: "http://192.168.28.255:8080/user-war/login/session/id",
 
 	success: function(data){
 
@@ -32,7 +32,7 @@ $.ajax({
 	type: "PUT",
 
        
-	url: "http://192.168.1.78:8080/user-war/user/register?userId=3q4343ssdsd1&userName=asdfsdf",
+	url: "http://192.168.28.255:8080/user-war/user/register?userId=3q4343ssdsd1&userName=asdfsdf",
 
        
 	data: JSON.stringify([{"userId":"34343ssdsd1","userName":"asdfsdf0"},{"userId":"3q4343ssdsd1","userName":"asdfsdf1"}]),
@@ -87,7 +87,7 @@ $.ajax({
 	type: "delete",
 
        
-	url: "http://192.168.1.78:8080/user-war/user/vos",
+	url: "http://192.168.28.255:8080/user-war/user/vos",
 
        
 	data: JSON.stringify([{"userId":"34343ssdsd1","userName":"asdfsdf0"}]),
@@ -114,7 +114,7 @@ $.ajax({
 
 	type: "POST",
 
-	url: "http://192.168.1.78:8008/user/login/user",
+	url: "http://192.168.28.255:8008/user/login/user",
 
 	data: JSON.stringify({﻿"userEmail":"34343ssdsd1",﻿"password":"asdfsdf0"}),
 
@@ -135,7 +135,7 @@ $.ajax({
 
 	type: "GET",
 
-	url: "http://192.168.1.78:8008/user/login/remotetoken?token=",
+	url: "http://192.168.28.255:8008/user/login/remotetoken?token=",
 
 	//data: JSON.stringify({﻿"userEmail":"34343ssdsd1",﻿"password":"asdfsdf0"}),
 

@@ -15,7 +15,7 @@ $.ajax({
 	type: "delete",
 
        
-	url: "http://192.168.1.78:8080/user-war/userCategory/vos",
+	url: "http://192.168.28.255:8080/user-war/userCategory/vos",
 
        
 	data: JSON.stringify([{"categoryId":"10000","categoryName":"GD"},{"categoryId":"10001","categoryName":"None-GD"}]),

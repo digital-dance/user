@@ -31,7 +31,7 @@
 
     			type: "post",
     			
-    			url: "http://192.168.1.78:8008/user/login/user?clientType=3",
+    			url: "http://192.168.28.255:8008/user/login/user?clientType=3",
     			data: JSON.stringify(user),
 
     			contentType: "application/json; charset=utf-8",
@@ -69,7 +69,7 @@
 
                     			type: "get",
 
-                    			url: "http://192.168.1.78:8008/user/login/remotetoken?token="+userEmail,
+                    			url: "http://192.168.28.255:8008/user/login/remotetoken?token="+userEmail,
                                 xhrFields:{withCredentials:true},
                     			success: function(data){
                     		 		document.getElementById("msgBox").innerHTML = JSON.stringify(data);

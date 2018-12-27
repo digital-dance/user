@@ -227,10 +227,10 @@ public class LoginController
 //                    callBackUrl = URLDecoder.decode(callBackUrl, "UTF-8");
                     String encodedToken = URLEncoder.encode( token, "UTF-8" );
                     String ret = callBackUrl.split("\\?")[0] + "?token=" + encodedToken + "&" + queryStringObj;
-                    user.setRedirect( ret );
+                    user.setRedirect( ( ret ) );
 
                     if( !( ClientTypeEnums.WEBAJAX.getClientType().equals(clientType) ) ){
-                        response.sendRedirect( ret );
+//                        response.sendRedirect( ret );
                     }
                 }
 
