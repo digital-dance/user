@@ -65,7 +65,7 @@ $(document).ready(function () {//alert(0);
                 $('#errorTip').show();
                 return false;
             }
-						alert(escape(password));
+						//alert(escape(password));
             $.ajax({
 						type: "POST",
 						url: "http://192.168.28.255:8008/user/login/user",
@@ -85,7 +85,7 @@ $(document).ready(function () {//alert(0);
 											// var returnUrl = wapDecode(getQueryStringValue('returnUrl'));
 											var returnUrl = data.result.redirect;
 											if (returnUrl == null || returnUrl == '') {
-													document.location.href = "/user/register.html";
+													document.location.href = "/user/newsInfo.html";
 											}
 											else {
 													document.location.href = decodeURI(returnUrl);
