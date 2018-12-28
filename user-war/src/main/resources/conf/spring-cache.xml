@@ -128,8 +128,8 @@
 
     <bean id="redisFactory" class="com.digital.dance.framework.codis.client.RedisFactory">
         <property name="config" ref="jedisPoolConfig"/>
-        <property name="proxyHost" value="${redis.host}"/>
-        <property name="port" value="${redis.port}"/>
+        <!--<property name="proxyHost" value="${redis.host}"/>-->
+        <!--<property name="port" value="${redis.port}"/>-->
         <property name="subSysName" value="${codis.subSysName}"/>
         <property name="authpassword" value="${codis.authpassword}"/>
         <property name="timeout" value="${redis.cache.timeout}"/>
