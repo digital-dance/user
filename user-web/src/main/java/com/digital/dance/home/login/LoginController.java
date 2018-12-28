@@ -142,8 +142,9 @@ public class LoginController
             UserBO userBO = null;
 
             if(userService != null){
-                userBO  = userService.checkUser(userEmail, md5Psw);
+                userBO  = userService.checkUser( userEmail, md5Psw );
                 userBO.setIsRemember( userVo.getIsRemember() );
+                userBO.setTokenTimeOut( userVo.getTokenTimeOut() );
 
                 //fake begin
                 //UserBO userBO = new UserBO();// userService.findUserByUserName(userName);
