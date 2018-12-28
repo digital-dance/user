@@ -18,6 +18,7 @@ public class UserBO extends UserServiceBaseBO implements Serializable {
 	private Boolean rolePrivilegeInd;
 
 	private Boolean isRemember;
+	public Long tokenTimeOut = Long.valueOf(-1L);
 
 	private Integer state;
 
@@ -35,6 +36,20 @@ public class UserBO extends UserServiceBaseBO implements Serializable {
 
 	public void setIsRemember(Boolean isRemember) {
 		this.isRemember = isRemember;
+	}
+
+	/**
+	 * @return the tokenTimeOut
+	 */
+	public Long getTokenTimeOut() {
+		return tokenTimeOut;
+	}
+
+	/**
+	 * @param tokenTimeOut the tokenTimeOut to set
+	 */
+	public void setTokenTimeOut(Long tokenTimeOut) {
+		this.tokenTimeOut = tokenTimeOut;
 	}
 
 	public String getUserId() {

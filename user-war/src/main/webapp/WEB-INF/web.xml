@@ -165,7 +165,7 @@
 
 		<init-param>
 			<param-name>allowUrl</param-name>
-			<param-value>http://192.168.28.255:8008/#/home;http://192.168.28.255:8008/user/login/views/login.jsp;/index/home;/login/user;login/views/default;/login/pubKey;/login/token/validation;/login/token/persistence;/login.html;/login/</param-value>
+			<param-value>http://192.168.28.255:8008/#/home;http://192.168.28.255:8008/user/login/views/login.jsp;/index/home;/login/user;login/views/default;/login/pubKey;/login/token/validation;/login/token/persistence;/login.html;/login/;/register</param-value>
 		</init-param>
 		<init-param>
 			<param-name>allowSuffix</param-name>
