@@ -76,7 +76,7 @@ public class IndexController {
 			String token = JSONUtils.toJson(tokenLoginInfo);
 			token = RSACoderUtil.encryptByPrivateKey(casPrivateKey, token);
 			token = URLEncoder.encode( token, "UTF-8" );
-			ret = callBackUrl.split("\\?")[0] + "?token=" + token;
+			ret = callBackUrl.split("\\?")[0] + "?token=" + token + "&" + queryString;;
 
 		} else if( loginInfo != null ){
 			ResponseVo responsedata = new ResponseVo();
