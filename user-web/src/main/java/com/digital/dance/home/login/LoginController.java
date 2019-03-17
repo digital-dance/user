@@ -13,6 +13,7 @@ import javax.servlet.http.HttpSession;
 import com.digital.dance.client.core.shiro.cache.VCache;
 import com.digital.dance.client.core.shiro.service.impl.PrivilegeCacheManager;
 import com.digital.dance.common.utils.LoggerUtils;
+import com.digital.dance.common.utils.SpringUtils;
 import com.digital.dance.commons.exception.BizException;
 import com.digital.dance.commons.serialize.json.utils.JSONUtils;
 import com.digital.dance.framework.codis.Codis;
@@ -252,6 +253,42 @@ public class LoginController
         }
 
         return reVo;
+    }
+
+    @RequestMapping("loginUserRole")
+    @ResponseBody
+    public List<LoginUserRole> getLoginUserRole(HttpServletRequest request,
+                                                HttpServletResponse response, String userId ){
+        String key = PrivilegeCacheManager.getUserRolesKey( userId );
+        long len = VCache.getLenByList( key );
+        List<LoginUserRole> loginUserRoles = VCache.getVByList(key, 0, (int)len, LoginUserRole.class);
+
+//        try {
+//            SSOLoginManageHelper ssologinManageHelper = SpringUtils.getBean("ssologinManageHelper");
+//            ResponseVo responseVo = new ResponseVo();
+//            if( loginUserRoles == null || loginUserRoles.size() < 1 ){
+//
+//                Map<String, String> pMap = new HashMap<String, String>();
+//                pMap.put("userId", userId);
+//
+//                String validationToken = HttpClientUtil.executeGetReq(
+//                        ssologinManageHelper.getLoginServiceUrl()+"/permission/resource/user"
+//                        , new HashMap<String, String>(), pMap);
+//                responseVo = (ResponseVo) JSONUtils.toObject(validationToken, ResponseVo.class);
+//                loginUserRoles = new ArrayList<LoginUserRole>();
+//                List lRBObjs = (List)responseVo.getResult();
+//                for (Object obj : lRBObjs){
+//                    LoginUserRole loginUserRole = new LoginUserRole();
+//                    BeanUtils.copyProperties(obj, loginUserRole);
+//                    loginUserRoles.add(loginUserRole);
+//                }
+//            }
+//
+//        } catch (Exception ex){
+//            log.error("sso client error.", ex);
+//            throw new BizException("decode token error.");
+//        }
+        return loginUserRoles;
     }
 
     @RequestMapping("session_in")
