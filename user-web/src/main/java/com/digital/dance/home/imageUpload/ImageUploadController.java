@@ -1,13 +1,12 @@
-///*
+///**
 // * 名称：ImageUploadController.java
 //
-// * 项目：Midea消费金融项目
-// * 描述：影像上传Controller类
-// * 创建人：李海飞
-// * 创建时间：2016-8-31
-// * 修改人：
-// * 修改时间：
-// * 修改内容：
+//
+// *
+// * @author liuxy
+// *
+// * time:2016年8月22日上午9:15:00
+
 // */
 //package com.digital.dance.home.imageUpload;
 //

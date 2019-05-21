@@ -22,6 +22,9 @@ import com.digital.dance.user.commons.Constants;
 import com.digital.dance.user.commons.ResponseVo;
 import com.digital.dance.vo.SystemUserRoleVO;
 
+/**
+ * @author liuxy
+ */
 @Controller
 @RequestMapping("/userrole")
 public class UserRoleController {

@@ -5,7 +5,7 @@ import java.util.Date;
 
 /**
  * 用户接口返回基础数据
- * @author liwy
+ * @author liuxy
  *
  * time:2016年8月25日下午9:37:38
  */

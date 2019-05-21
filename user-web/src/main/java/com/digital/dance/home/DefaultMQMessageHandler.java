@@ -6,6 +6,12 @@ import com.digital.dance.framework.message.handler.MQMessageHandler;
 import com.digital.dance.user.commons.Log;
 import com.digital.dance.user.commons.StringTools;
 
+/**
+ *
+ * @author liuxy
+ *
+ * time:2016年8月22日上午9:15:00
+ */
 public class DefaultMQMessageHandler implements MQMessageHandler {
 	Log log = new Log(DefaultMQMessageHandler.class);
 	@Override

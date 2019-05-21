@@ -30,7 +30,7 @@ import java.net.URLEncoder;
 
 /**
  * 
- * @author liwy
+ * @author liuxy
  *
  * time:2016年8月22日上午9:15:00
  */

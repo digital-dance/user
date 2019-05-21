@@ -9,6 +9,13 @@ import javax.crypto.spec.SecretKeySpec;
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;
 
+/**
+ *
+ *
+ * @author  xinyu liu
+ * @version cas-user v1.0
+ * @since   cas-user v1.0
+ */
 public class EncryptUtil {
 
 	private static final String UTF8 = "utf-8";

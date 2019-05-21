@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 /**
  * 用户支付信息查询
- * @author liwy
+ * @author liuxy
  *
  * time:2016年8月25日下午9:36:08
  */

@@ -32,7 +32,7 @@ import com.digital.dance.vo.UserVO;
 
 /**
  * 
- * @author liwy
+ * @author liuxy
  *
  */
 @Controller

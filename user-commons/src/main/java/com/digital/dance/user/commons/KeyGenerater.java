@@ -5,6 +5,13 @@ import java.security.PrivateKey;
 import java.security.PublicKey;
 import java.security.SecureRandom;
 
+/**
+ *
+ *
+ * @author  xinyu liu
+ * @version cas-user v1.0
+ * @since   cas-user v1.0
+ */
 public class KeyGenerater {
 	 private byte[] priKey;
 	 private byte[] pubKey;

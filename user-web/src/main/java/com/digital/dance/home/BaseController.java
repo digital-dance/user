@@ -13,9 +13,9 @@ import com.digital.dance.user.commons.Md5Util;
 /**
  * 
  * 
- * @author  李武元
- * @version ECF-user v1.0 
- * @since   ECF-user v1.0
+ * @author  xinyu liu
+ * @version cas-user v1.0
+ * @since   cas-user v1.0
  */
 public class BaseController
 {

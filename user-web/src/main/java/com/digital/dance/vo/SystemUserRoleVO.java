@@ -5,6 +5,13 @@ import com.digital.dance.bo.UserServiceBaseBO;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ *
+ *
+ * @author  xinyu liu
+ * @version cas-user v1.0
+ * @since   cas-user v1.0
+ */
 public class SystemUserRoleVO extends UserServiceBaseVO implements Serializable {
 	/**
 	 *
